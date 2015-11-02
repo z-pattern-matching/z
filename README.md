@@ -31,6 +31,37 @@ var myReverse = function(list) {
 }
 ```
 
+### Quick Examples
+```javascript
+var list = [1, 2, 3, 4, 5]
+
+var head = list => {
+  list.$match(
+    (x, _) =>  x
+  )
+}
+
+head(list) //1
+
+var init = list => {
+  return list.$match(
+    (x)     => [],
+    (x, xs) => [x].concat(xs.init())
+  )
+}
+
+init(list) //[1, 2, 3, 4]
+
+var last = list => {
+  return list.$match(
+    // loop until reaches last element
+    (x, xs) => xs.length == 0 ? x : xs.last() 
+  )
+}
+
+last(list) // 5
+```
+
 ### Literal Pattern Values Check
 
 You can make patterns checking values. Example, let's create our map function `myMap` , we'll create 2 pattern matching head:tail (x:xs) , the only difference it that first one will check if tail is empty ```(x:xs = [])```. Check it out:
