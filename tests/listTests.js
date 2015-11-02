@@ -1,6 +1,6 @@
 var should = require('chai').should()
 
-var z = require('./../z');
+var z = require('./../z')('Match');
 
 describe('lists tests', function () {
   it('should match head of an array', function () {
@@ -20,20 +20,39 @@ describe('lists tests', function () {
   });
 
   it('should map an array', function () {
-    ([1, 2, 3, 4, 5]).map(number => number * 2).should.eql([2, 4, 6 , 8, 10])
+    var $map = (numbers, f) => {
+      return numbers.$match(
+        (_, xs = []) => [],
+        (x, xs)      => [f(x)].concat(xs.map(f))
+      )
+    };
+
+    $map([1, 2, 3, 4, 5], number => number * 2).should.eql([2, 4, 6 , 8, 10])
   });
 
   it('should use 3 positions of pattern matching', function(){
-    var numbers = Array(1,2, 2, 3, 3)
-
     var compress = (numbers) => {
-      return numbers.match(
+      return numbers.$match(
         (x) => [x],
-        (x, y, xs) => (x == y) ? compress([x].$$$(xs)) : [x].$$$(compress([y].$$$(xs)))
+        (x, y, xs) => (x == y) ? compress([x].concat(xs)) : [x].concat(compress([y].concat(xs)))
       )
     }
 
-    compress(numbers).should.eql([1, 2, 3])
+    compress([1, 1 , 2, 3, 3, 3]).should.eql([1, 2, 3])
   })
+
+  it('should map a constant', function (){
+    'h'.$match(
+      (x = 'h') => true,
+      (x)       => false
+    ).should.equal(true);
+  });
+
+  it('should map a constant 2', function (){
+    'a'.$match(
+      (x = 'h') => true,
+      (x)       => false
+    ).should.equal(false);
+  });
 
 });
