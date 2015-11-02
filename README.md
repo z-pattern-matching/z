@@ -33,15 +33,12 @@ var myReverse = function(list) {
 
 ### Quick Examples
 ```javascript
-var list = [1, 2, 3, 4, 5]
-
 var head = list => {
   list.$match(
     (x, _) =>  x
   )
 }
-
-head(list) //1
+head([1, 2, 3, 4, 5]) //1
 
 var init = list => {
   return list.$match(
@@ -49,8 +46,7 @@ var init = list => {
     (x, xs) => [x].concat(xs.init())
   )
 }
-
-init(list) //[1, 2, 3, 4]
+init([1, 2, 3, 4, 5]) //[1, 2, 3, 4]
 
 var last = list => {
   return list.$match(
@@ -58,8 +54,15 @@ var last = list => {
     (x, xs) => xs.length == 0 ? x : xs.last() 
   )
 }
+last([1, 2, 3, 4, 5]) // 5
 
-last(list) // 5
+var compress = list => {
+  return list.$match(
+    (x) => [x],
+    (x, y, xs) => (x == y) ? compress([x].concat(xs)) : [x].concat(compress([y].concat(xs)))
+  )
+}
+compress([1, 2, 2, 3, 4, 4, 4, 5]) //[1, 2, 3, 4, 5]
 ```
 
 ### Literal Pattern Values Check
