@@ -40,13 +40,19 @@ String.prototype.$match = function() {
   return this.split('').$match.apply(this, arguments)
 }
 
+Number.prototype.$match = function() {
+  var arrayOfNumber = [].concat(this.valueOf())
+  return arrayOfNumber.$match.apply(arrayOfNumber, arguments)
+}
+
 Array.prototype.$match = function () {
   var list = this;
-
   for (var i = 0; i < arguments.length && arguments[i]; i++) {
     var currentPattern = getParametersWithDefaultValues(arguments[i])
 
-    if (currentPattern.arguments.length == 0 && list.length === 0) return currentPattern.function()
+    if (currentPattern.arguments.length == 0 && list.length === 0) {
+      return currentPattern.function()
+    }
     if (currentPattern.arguments.length == 1 && list.length === 1){
       if(currentPattern.arguments[0].value == PATTERN_WITHOUT_VALUE || list[0] == currentPattern.arguments[0].value)
         return currentPattern.function(list[0])

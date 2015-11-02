@@ -1,6 +1,6 @@
 var should = require('chai').should()
 
-var z = require('./../z')('Match');
+require('./../z');
 
 describe('lists tests', function () {
   it('should match head of an array', function () {
@@ -53,6 +53,42 @@ describe('lists tests', function () {
       (x = 'h') => true,
       (x)       => false
     ).should.equal(false);
+  });
+
+  it.only('should map a constant 3', function (){
+    var factorial = function(number) {
+      return number.$match(
+        function(x){ return (x == 0) ? 1 : x * factorial (x - 1) }
+      )
+    }
+
+    console.log(factorial(6))
+
+  });
+
+  it('should reverse a list', function (){
+
+    var myReverse = (list) => {
+      return list.$match(
+        ()           => [],                          //match list ending
+        (head, tail) => myReverse(tail).concat(head) //creates a reversed list recursively
+      )
+    }
+
+
+    myReverse([1, 2, 3, 4, 5]).should.eql([5, 4, 3, 2, 1]);
+  });
+
+  it('should reverse a list2', function (){
+
+    var myReverse = function(list) {
+      return list.$match(
+        function(){ return [] },
+        function(head, tail){ return myReverse(tail).concat(head) }
+      )
+    }
+
+    myReverse([1, 2, 3, 4, 5]).should.eql([5, 4, 3, 2, 1]);
   });
 
 });
