@@ -1,4 +1,4 @@
-# ![z](https://raw.githubusercontent.com/leonardiwagner/z/master/z-logo.png)
+# ![z](https://raw.githubusercontent.com/leonardiwagner/z/master/z-logo.png) [![Build Status](https://travis-ci.org/leonardiwagner/z.svg?branch=master)](https://travis-ci.org/leonardiwagner/z)
 Native pattern matching for Javascript. 
 
 
