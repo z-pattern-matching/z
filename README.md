@@ -1,4 +1,4 @@
-# z
+# ![z](https://raw.githubusercontent.com/leonardiwagner/z/master/z-logo.png)
 Native pattern matching for Javascript. 
 
 
