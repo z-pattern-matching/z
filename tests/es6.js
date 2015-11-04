@@ -2,7 +2,7 @@ var should = require('chai').should()
 
 require('./../z');
 
-describe('lists tests', function () {
+describe('tests with ES6', function () {
   it('should match head of an array', function () {
     (['a', 'b', 'c', 'd', 'e']).head().should.equal('a')
   });

@@ -1,11 +1,29 @@
 {
   "name": "z",
-  "version": "0.0.0",
-  "description": "",
+  "version": "0.0.3",
+  "main": "z.js",
+  "description": "pattern matching for javascript",
   "scripts": {
-    "test": "node_modules/mocha/bin/mocha tests/.  --harmony_default_parameters"
+    "test": "node_modules/mocha/bin/mocha tests/.  --harmony_default_parameters",
+    "test:es5": "node_modules/mocha/bin/mocha tests/es5.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leonardiwagner/z.git..git"
   },
   "author": "Wagner Leonardi",
+  "keywords": [
+    "pattern",
+    "matching",
+    "functional",
+    "haskell"
+  ],
+
+  "bugs": {
+    "url": "https://github.com/leonardiwagner/z.git./issues"
+  },
+  "homepage": "https://github.com/leonardiwagner/z.git.#readme",
+  "license": "Apache-2.0",
   "devDependencies": {
     "chai": "^3.4.0",
     "mocha": "^2.3.3"
