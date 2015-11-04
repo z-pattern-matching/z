@@ -3,9 +3,9 @@ Native pattern matching for Javascript.
 
 
 ### Usage
-- Install via NPM: `npm install z`
-- Require z library in your code
-- z will implement `$match` function on Arrays, Strings and Numbers for pattern matching. Example on ES6:
+- install via npm: `npm install z`
+- require **z** library in your code
+- **z** will implement `$match` function on Arrays, Strings and Numbers for pattern matching, example:
 
 ```javascript
 require('z')
@@ -20,7 +20,7 @@ var myReverse = (list) => {
 myReverse([1, 2, 3, 4, 5]) //[5, 4, 3, 2, 1])
 ```
 
-you can use traditional javascript as well.. just isn't pretty as ES6, but works like a charm!
+The example above is using Javascript ECMAScript 6 (ES6), but you can use **z** with traditional Javascript as well, just isn't that pretty:
 
 ```javascript
 var myReverse = function(list) {
@@ -31,57 +31,23 @@ var myReverse = function(list) {
 }
 ```
 
-### Quick Examples
-```javascript
-var head = list => {
-  list.$match(
-    (x, _) =>  x
-  )
-}
-head([1, 2, 3, 4, 5]) //1
+As you can see, the pattern matching "trick" in **z** is just functions where patterns are described by parameters. Amazing, simple and powerful, eh? 
 
-var init = list => {
-  return list.$match(
-    (x)     => [],
-    (x, xs) => [x].concat(xs.init())
-  )
-}
-init([1, 2, 3, 4, 5]) //[1, 2, 3, 4]
+### Available Patterns
 
-var last = list => {
-  return list.$match(
-    // loop until reaches last element
-    (x, xs) => xs.length == 0 ? x : xs.last() 
-  )
-}
-last([1, 2, 3, 4, 5]) // 5
+- `() =>` match empty (array, string or number)
+- `(x) =>` match array with only one element.
+- `(x, xs)` => match array with more than one element. First parameter is the first element (head), second is others (tail)
+- `(x, y, xs)` => match array with more than two elements. First parameter is the first element (head), second parameter is the second element, third are others (tail). You can use extend this patterns for more elements, eg.: - `(x, y, z, xs)`, `(a, b, c, d, e, f, g, tail)`, etc...
 
-var compress = list => {
-  return list.$match(
-    (x) => [x],
-    (x, y, xs) => (x == y) ? compress([x].concat(xs)) : [x].concat(compress([y].concat(xs)))
-  )
-}
-compress([1, 2, 2, 3, 4, 4, 4, 5]) //[1, 2, 3, 4, 5]
-```
+You can give any name for parameters, such as `head, tail` instead `x,xs` . If the matching has more than one parameter, the last parameter will be always the end of the array (tail).
 
-### Literal Pattern Values Check
+### Patterns with value comparsion (only on ES6 with default parameters)
 
-You can make patterns checking values. Example, let's create our map function `myMap` , we'll create 2 pattern matching head:tail (x:xs) , the only difference it that first one will check if tail is empty ```(x:xs = [])```. Check it out:
+- `(x = 'some value')` match if the element has the specified value. The value can be anything, such as array, number, string, null, undefined, etc...
+- `(x, xs = [])` same match above with tail. It can match any value as well.
 
-```javascript
-var myMap = (list, f) => {
-  return list.$match(
-    (x, xs = []) => [],
-    (x, xs)      => [f(x)].concat(xs.map(f))
-  )
-}
-
-myMap([1, 2, 3, 4, 5], number => number * 2) //[2, 4, 6 , 8, 10]
-```
-
-
-Nice, you can also check for other values besides empty lists, such as numbers, strings, null, undefined, etc.. Check this other example
+With value comparsion we can make powerful patterns, eg.:
 
 ```javascript  
 var factorial = number => {
@@ -94,12 +60,11 @@ var factorial = number => {
 factorial(6) //720
 ```
 
-**IMPORTANT:** This value check is only possible due [ES6's Default Parameter Values](http://tc39wiki.calculist.org/es6/default-parameter-values/) which is only avaiable in ES6 (obviously). Currently you need to put the flag `--harmony_default_parameters` in your Node.js app to make it work. Don't be afraid, at some next Node.js version it'll come by default.
+These patters are only supported due ES6 default parameters. Currently you need to give `--harmony_default_parameters` to make Node.js enable this feature. Don't be afraid, Node.js will enable this features by default in the next versions.
 
+### Won't use ES6 with default parameters?
 
-### Can't use ES6 Default Parameter?
-
-Just place the value check in your expression:
+It's OK, you only need to put value comparsion inside your matches, eg.:
 
 ```javascript
 var factorial = number => {
@@ -108,9 +73,10 @@ var factorial = number => {
   )
 }
 ```
-### Can't use ES6 at all?
 
-Just for the habit, the same code in traditional Javascript:
+### Won't use ES6 at all?
+
+We too love the ol' JavaScript, just for the habit the same function written in traditional Javascript:
 
 ```javascript
 var factorial = function(number) {
@@ -119,3 +85,48 @@ var factorial = function(number) {
   )
 }
 ```
+
+### This is AMAZING, why nobody did this before on JavaScript?
+
+[He did](https://github.com/natefaubion), years ago! But [his first and greater Javascript pattern match library](https://github.com/natefaubion/matches.js) matches with strings, and this is ugly, sorry. Maybe he though this is ugly too and [he did a new pattern matching library](https://github.com/natefaubion/sparkler) without strings.. buuut need to use some macro stuff.. and well, this isn't pretty!
+
+Why *z* was created so? Because *IT'S BEAUTIFUL*, did you see? no need to install anything but the actual *z* library, the matches are real native javascript, the patterns are written naturally. Of course it isn't powerful as the mentioned libraries, that matches a lot of other patterns due JavaScript limitations, but it answer the most used patterns for the major problem solving, check some examples:
+
+### Quick Examples
+- get all elements but last:
+```javascript
+var init = list => {
+  return list.$match(
+    (x)     => [],
+    (x, xs) => [x].concat(xs.init())
+  )
+}
+init([1, 2, 3, 4, 5]) //[1, 2, 3, 4]
+```
+
+- remove repeated elements from a array:
+```javascript
+var compress = list => {
+  return list.$match(
+    (x) => [x],
+    (x, y, xs) => (x == y) ? compress([x].concat(xs)) : [x].concat(compress([y].concat(xs)))
+  )
+}
+compress([1, 2, 2, 3, 4, 4, 4, 5]) //[1, 2, 3, 4, 5]
+```
+
+- map implementation
+```javascript
+var myMap = (list, f) => {
+  return list.$match(
+    (x, xs = []) => [],
+    (x, xs)      => [f(x)].concat(xs.map(f))
+  )
+}
+
+myMap([1, 2, 3, 4, 5], number => number * 2) //[2, 4, 6 , 8, 10]
+```
+
+### The project is new and growing!
+
+I expect some help for new ideas, bug report, meet new friends and accept some pull requests. Don't be afraid, I'm not expert on functional programming so I really need help, so feel free to open and issue, PRs and contact me.
