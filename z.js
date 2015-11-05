@@ -81,30 +81,4 @@ Array.prototype.$match = function () {
   }
 };
 
-Array.prototype.head = function () {
-  return this.$match(
-    (x, xs) =>  x
-  )
-};
-
-Array.prototype.tail = function () {
-  return this.$match(
-    (x, xs) => xs
-  )
-};
-
-Array.prototype.last = function () {
-  return this.$match(
-    (x, xs) => !xs.length ? x : xs.last()
-  )
-};
-
-Array.prototype.init = function () {
-  return this.$match(
-    (x)     => [],
-    (x, xs) => [x].concat(xs.init())
-  )
-};
-
-
 module.exports = Array;
