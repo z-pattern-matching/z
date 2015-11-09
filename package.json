@@ -4,8 +4,8 @@
   "main": "z.js",
   "description": "pattern matching for javascript",
   "scripts": {
-    "test": "node_modules/mocha/bin/mocha tests/.  --harmony_default_parameters",
-    "test:es5": "node_modules/mocha/bin/mocha tests/es5.js"
+    "test": "node_modules/mocha/bin/mocha tests/es5.js",
+    "test:es6": "node_modules/mocha/bin/mocha tests/es6.js  --harmony_default_parameters"
   },
   "repository": {
     "type": "git",

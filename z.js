@@ -1,6 +1,6 @@
-//why? cuz user may match null, undefined, empty list, and go one... I hope that no one matches this...
-var PATTERN_WITHOUT_VALUE = '1T$ R34LLY N0 V4LU3'
+var PATTERN_WITHOUT_VALUE = '1T$ R34LLY N0 V4LU3' //why? cuz user may match null, undefined, empty list, etc..
 
+//get parameters from match functions
 var STRIP_COMMENTS = /((\/\/.*$)|(\/\*[\s\S]*?\*\/))/mg;
 var ARGUMENT_NAMES = /([^\s,]+)/g;
 function getParamNames(func) {
@@ -11,6 +11,7 @@ function getParamNames(func) {
   return result;
 }
 
+//normalize parameters when function has default values (ES6)
 function getParametersWithDefaultValues(f){
   var splitedArguments = getParamNames(f)
   var argumentsByValues = {
@@ -35,28 +36,33 @@ function getParametersWithDefaultValues(f){
   return argumentsByValues
 }
 
-
-String.prototype.$match = function() {
-  return this.split('').$match.apply(this, arguments)
+//create array from string for matching
+String.prototype.matches = function() {
+  return this.split('').matches.apply(this, arguments)
 }
 
-Number.prototype.$match = function() {
+//create simple array from a number for matching
+Number.prototype.matches = function() {
   var arrayOfNumber = [].concat(this.valueOf())
-  return arrayOfNumber.$match.apply(arrayOfNumber, arguments)
+  return arrayOfNumber.matches.apply(arrayOfNumber, arguments)
 }
 
-Array.prototype.$match = function () {
+//the great matching function!
+Array.prototype.matches = function () {
   var list = this;
+  //cycle through matches
   for (var i = 0; i < arguments.length && arguments[i]; i++) {
     var currentPattern = getParametersWithDefaultValues(arguments[i])
-
+    //empty array
     if (currentPattern.arguments.length == 0 && list.length === 0) {
       return currentPattern.function()
     }
+    //single item array
     if (currentPattern.arguments.length == 1 && list.length === 1){
       if(currentPattern.arguments[0].value == PATTERN_WITHOUT_VALUE || list[0] == currentPattern.arguments[0].value)
         return currentPattern.function(list[0])
     }
+    //multiple items array
     if (currentPattern.arguments.length >  1 && (list.length + 1 >= currentPattern.arguments.length)) {
       var patterns = [];
       for (j = 0; j < (currentPattern.arguments.length - 1); j++) {
@@ -77,34 +83,39 @@ Array.prototype.$match = function () {
       }
     }
 
-
+    //otherwise
+    if(currentPattern.function.name == 'otherwise'){
+      return currentPattern.function(list)
+    }
   }
+
+  throw new Error("Match error: can't match anything for: " + this);
 };
 
+//helper methods
 Array.prototype.head = function () {
-  return this.$match(
-    (x, xs) =>  x
+  return this.matches(
+    (x, _) =>  x
   )
 };
 
 Array.prototype.tail = function () {
-  return this.$match(
-    (x, xs) => xs
+  return this.matches(
+    (_, xs) => xs
   )
 };
 
 Array.prototype.last = function () {
-  return this.$match(
+  return this.matches(
     (x, xs) => !xs.length ? x : xs.last()
   )
 };
 
 Array.prototype.init = function () {
-  return this.$match(
-    (x)     => [],
+  return this.matches(
+    (_)     => [],
     (x, xs) => [x].concat(xs.init())
   )
 };
-
 
 module.exports = Array;

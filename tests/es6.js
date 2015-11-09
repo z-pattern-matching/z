@@ -21,7 +21,7 @@ describe('tests with ES6', function () {
 
   it('should map an array', function () {
     var $map = (numbers, f) => {
-      return numbers.$match(
+      return numbers.matches(
         (_, xs = []) => [],
         (x, xs)      => [f(x)].concat(xs.map(f))
       )
@@ -32,7 +32,7 @@ describe('tests with ES6', function () {
 
   it('should use 3 positions of pattern matching', function(){
     var compress = (numbers) => {
-      return numbers.$match(
+      return numbers.matches(
         (x) => [x],
         (x, y, xs) => (x == y) ? compress([x].concat(xs)) : [x].concat(compress([y].concat(xs)))
       )
@@ -42,34 +42,31 @@ describe('tests with ES6', function () {
   })
 
   it('should map a constant', function (){
-    'h'.$match(
+    'h'.matches(
       (x = 'h') => true,
       (x)       => false
     ).should.equal(true);
   });
 
   it('should map a constant 2', function (){
-    'a'.$match(
+    'a'.matches(
       (x = 'h') => true,
       (x)       => false
     ).should.equal(false);
   });
 
-  it.only('should map a constant 3', function (){
+  it('should map a constant 3', function (){
     var factorial = function(number) {
-      return number.$match(
+      return number.matches(
         function(x){ return (x == 0) ? 1 : x * factorial (x - 1) }
       )
     }
-
-    console.log(factorial(6))
-
   });
 
   it('should reverse a list', function (){
 
     var myReverse = (list) => {
-      return list.$match(
+      return list.matches(
         ()           => [],                          //match list ending
         (head, tail) => myReverse(tail).concat(head) //creates a reversed list recursively
       )
@@ -82,7 +79,7 @@ describe('tests with ES6', function () {
   it('should reverse a list2', function (){
 
     var myReverse = function(list) {
-      return list.$match(
+      return list.matches(
         function(){ return [] },
         function(head, tail){ return myReverse(tail).concat(head) }
       )
