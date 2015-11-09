@@ -34,10 +34,11 @@ var myReverse = function(list) {
 The pattern matching "trick" in **z** is: each match is a function, where function parameters describes the pattern. Simple and powerful, eh? 
 ### Available Patterns
 
-- `() =>` matches empty (array or string) eg.: `[]`, `''`
-- `(x) =>` matches an array with a single element eg.: `[1]`, `[[1, 2, 3]]` (array with a single array), matches single character eg.: `'x'` or matches a single number eg.:`1`
-- `(x, xs)` => matches array with more than one element. First parameter is the first element (head), second is others (tail)
-- `(x, y, xs)` => matches array with more than two elements. First parameter is the first element (head), second parameter is the second element, third are others (tail). You can specify more than 2 items eg.: `(x, y, z, xs)`, `(a, b, c, d, e, f, g, tail)`, etc...
+- `() => {}` matches empty (array or string) eg.: `[]`, `''`
+- `(x) => {}` matches an array with a single element eg.: `[1]`, `[[1, 2, 3]]` (array with a single array), matches single character eg.: `'x'` or matches a single number eg.:`1`
+- `(x, xs) => {}` matches array with more than one element. First parameter is the first element (head), second is others (tail)
+- `(x, y, xs) => {}` matches array with more than two elements. First parameter is the first element (head), second parameter is the second element, third are others (tail). You can specify more than 2 items eg.: `(x, y, z, xs)`, `(a, b, c, d, e, f, g, tail)`, etc...
+- `function otherwise(){ }` matches everything else.
 
 Rule of thumb: when the match has more than one parameter, the last parameter will be always the end of the array (tail).
 
