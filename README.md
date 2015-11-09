@@ -88,9 +88,9 @@ var factorial = function(number) {
 
 ### This is amazing! Why nobody did this before on JavaScript?
 
-[He did](https://github.com/natefaubion), years ago! But [his first and greater Javascript pattern match library](https://github.com/natefaubion/matches.js) create matches with strings, and this is ugly! (sorry). Maybe he thought this is ugly too and [he did a new pattern matching library](https://github.com/natefaubion/sparkler) without strings.. but need to use some macro stuff.. and well, this I don't think that's nice either.
+[He did](https://github.com/natefaubion), years ago! But [his first and greater Javascript pattern match library](https://github.com/natefaubion/matches.js) create matches with strings, and this is ugly! (sorry). Maybe he thought this is ugly too and [he did a new pattern matching library](https://github.com/natefaubion/sparkler) without strings, but need to install some macro stuff.. and well, I don't think that's nice either.
 
-Why *z* was created? Because *IT'S BEAUTIFUL*: No need to install nothing but the actual *z* library, the matches are real native javascript code, the patterns are written naturally, pure :heart:. Of course it hasn't all the features on these mentioned libraries due JavaScript limitations, but it supports the most used patterns to work with arrays, enhancing recursion and immutability code writing.
+Why **z** was created? Because *IT'S BEAUTIFUL*: No need to install nothing but the actual **z** library, the matches are real native javascript code, the patterns are written naturally, pure :heart:. Of course it hasn't all the features on these mentioned libraries due JavaScript limitations, but it supports the most used patterns to work with arrays, enhancing recursion and immutability code writing.
 
 ### Quick Examples
 - Get all elements but last:
