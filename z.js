@@ -95,26 +95,26 @@ Array.prototype.matches = function () {
 //helper methods
 Array.prototype.head = function () {
   return this.matches(
-    (x, _) =>  x
+    function(x, _){ return x; }
   )
 };
 
 Array.prototype.tail = function () {
   return this.matches(
-    (_, xs) => xs
+    function(_, xs){ return xs; }
   )
 };
 
 Array.prototype.last = function () {
   return this.matches(
-    (x, xs) => !xs.length ? x : xs.last()
+    function(x, xs){ return !xs.length ? x : xs.last(); }
   )
 };
 
 Array.prototype.init = function () {
   return this.matches(
-    (_)     => [],
-    (x, xs) => [x].concat(xs.init())
+    function(_){ return []; },
+    function(x, xs){ return [x].concat(xs.init()); }
   )
 };
 
