@@ -1,11 +1,10 @@
 {
   "name": "z",
   "version": "0.0.3",
-  "main": "z.js",
+  "main": "src/z.js",
   "description": "pattern matching for javascript",
   "scripts": {
-    "test": "node_modules/mocha/bin/mocha tests/es5.js",
-    "test:es6": "node_modules/mocha/bin/mocha tests/es6.js  --harmony_default_parameters"
+    "test": "node_modules/mocha/bin/mocha tests/*.js"
   },
   "repository": {
     "type": "git",

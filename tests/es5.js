@@ -1,7 +1,7 @@
 var expect = require('chai').expect
 var should = require('chai').should()
 
-require('./../z');
+var matches = require('./../src/z');
 
 describe('tests with ES5', function () {
   it('should reach tail', function () {

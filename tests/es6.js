@@ -1,6 +1,6 @@
 var should = require('chai').should()
 
-require('./../z');
+var matches = require('./../src/z');
 
 describe('tests with ES6', function () {
   it('should match head of an array', function () {
