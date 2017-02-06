@@ -4,7 +4,8 @@
   "main": "src/z.js",
   "description": "pattern matching for javascript",
   "scripts": {
-    "test": "node_modules/mocha/bin/mocha tests/*.js"
+    "test": "node_modules/mocha/bin/mocha tests/*.js",
+    "lint": "standard --fix \"src/z.js\" \"tests/*.js\""
   },
   "repository": {
     "type": "git",
@@ -17,7 +18,16 @@
     "functional",
     "haskell"
   ],
-
+  "standard": {
+    "globals": [
+      "describe",
+      "it",
+      "after",
+      "afterEach",
+      "before",
+      "beforeEach"
+    ]
+  },
   "bugs": {
     "url": "https://github.com/leonardiwagner/z.git./issues"
   },
@@ -25,6 +35,7 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "chai": "^3.4.0",
-    "mocha": "^2.3.3"
+    "mocha": "^2.3.3",
+    "standard": "^8.6.0"
   }
 }
