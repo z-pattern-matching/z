@@ -1,6 +1,9 @@
-# ![z](https://raw.githubusercontent.com/leonardiwagner/z/master/z-logo.png) [![Build Status](https://travis-ci.org/leonardiwagner/z.svg?branch=master)](https://travis-ci.org/leonardiwagner/z)
-Native pattern matching for Javascript. 
+# ![z](https://raw.githubusercontent.com/leonardiwagner/z/master/z-logo.png) Native pattern matching for Javascript.
 
+[![Build Status](https://travis-ci.org/z-pattern-matching/z.svg?branch=master)](https://travis-ci.org/leonardiwagner/z)
+[![Coverage Status](https://coveralls.io/repos/github/z-pattern-matching/z/badge.svg?branch=master)](https://coveralls.io/github/z-pattern-matching/z?branch=master)
+[![Dependency Status](https://gemnasium.com/badges/github.com/z-pattern-matching/z.svg)](https://gemnasium.com/github.com/z-pattern-matching/z)
+[![NPM version](https://img.shields.io/npm/v/z.svg)](https://www.npmjs.com/package/z)
 
 ### Usage
 - install via npm: `npm install z`
