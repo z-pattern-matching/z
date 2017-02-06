@@ -4,7 +4,8 @@
   "main": "src/z.js",
   "description": "pattern matching for javascript",
   "scripts": {
-    "test": "node_modules/mocha/bin/mocha tests/*.js",
+    "test": "mocha tests/*.js",
+    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "lint": "standard --fix \"src/z.js\" \"tests/*.js\"",
     "coverage": "nyc npm test"
   },
@@ -52,7 +53,9 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "chai": "^3.4.0",
+    "coveralls": "^2.11.16",
     "mocha": "^2.3.3",
+    "mocha-lcov-reporter": "^1.2.0",
     "nyc": "^10.1.2",
     "standard": "^8.6.0"
   }
