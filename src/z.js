@@ -72,6 +72,7 @@ Array.prototype.matches = function () {
       }
 
       var tail = []
+      // TODO: istanbul coverage error: 'else path not taken'
       if (list.length + 1 >= currentPattern.arguments.length - 1) {
         for (j = currentPattern.arguments.length - 1; j <= list.length - 1; j++) {
           tail.push(list[j])

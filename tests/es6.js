@@ -83,4 +83,10 @@ describe('tests with ES6', function () {
 
     myReverse([1, 2, 3, 4, 5]).should.eql([5, 4, 3, 2, 1])
   })
+
+  it('should match a number', function () {
+    (1).matches(
+      (x) => true
+    ).should.equal(true)
+  })
 })

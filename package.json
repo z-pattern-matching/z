@@ -5,7 +5,8 @@
   "description": "pattern matching for javascript",
   "scripts": {
     "test": "node_modules/mocha/bin/mocha tests/*.js",
-    "lint": "standard --fix \"src/z.js\" \"tests/*.js\""
+    "lint": "standard --fix \"src/z.js\" \"tests/*.js\"",
+    "coverage": "nyc npm test"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,22 @@
       "beforeEach"
     ]
   },
+  "nyc": {
+    "statements": 100,
+    "branches": 97.37,
+    "functions": 100,
+    "lines": 100,
+    "check-coverage": true,
+    "reporter": [
+      "lcov",
+      "text",
+      "text-summary"
+    ],
+    "exclude": [
+      "node_modules/**/*",
+      "tests/*"
+    ]
+  },
   "bugs": {
     "url": "https://github.com/leonardiwagner/z.git./issues"
   },
@@ -36,6 +53,7 @@
   "devDependencies": {
     "chai": "^3.4.0",
     "mocha": "^2.3.3",
+    "nyc": "^10.1.2",
     "standard": "^8.6.0"
   }
 }
