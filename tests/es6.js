@@ -88,4 +88,16 @@ describe('tests with ES6', function () {
     myReverse([1, 2, 3, 4, 5]).should.eql([5, 4, 3, 2, 1]);
   });
 
+  it.only('should match array of arrays', function(){
+    var matched = false;
+
+    [1, 2, [3]].matches(
+        (x = Array) => {matched = true},
+        (x) => {console.log("here", x)}
+    );
+
+    matched.should.eql(true);
+
+  });
+
 });
