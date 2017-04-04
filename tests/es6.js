@@ -54,6 +54,13 @@ describe('tests with ES6', function () {
     ).should.equal(false)
   })
 
+  it('should map a constant with more than 1 character', function () {
+    'abc'.matches(
+      (x = 'abc') => true,
+      (x) => false
+    ).should.equal(true)
+  })
+
   it('should map a constant 3', function () {
     var factorial = function (number) {
       return number.matches(
