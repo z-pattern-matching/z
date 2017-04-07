@@ -60,9 +60,9 @@ Array.prototype.matches = function () {
       return currentPattern.function()
     }
 
-    //string
-    if(typeof list === 'string' || list instanceof String){
-      if(currentPattern.arguments[0].value === list.toString()){
+    // string
+    if (typeof list === 'string' || list instanceof String) {
+      if (currentPattern.arguments[0].value === list.toString()) {
         return currentPattern.function(list)
       }
     }
