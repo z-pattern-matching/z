@@ -84,7 +84,7 @@ describe('tests with ES6', function () {
     myReverse([1, 2, 3, 4, 5]).should.eql([5, 4, 3, 2, 1])
   })
 
-  it.only('should match array of arrays', function(){
+  it.skip('should match array of arrays', function(){
     var matched = false;
 
     [1, 2, [3]].matches(
@@ -96,9 +96,12 @@ describe('tests with ES6', function () {
 
   });
 
-  it('should match a number', function () {
-    (1).matches(
-      (x) => true
+  it('should match a string', function () {
+    'test'.matches(
+      (x = 'testa') => false,
+      (x = 'test') => true,
+      (x = 'testo') => false,
+      function otherwise(){ return false }
     ).should.equal(true)
   })
 })
