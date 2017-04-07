@@ -39,7 +39,7 @@ function getParametersWithDefaultValues (f) {
 
 // create array from string for matching
 String.prototype.matches = function () {
-  return this.split('').matches.apply(this, arguments)
+  return [this].matches.apply(this, arguments)
 }
 
 // create simple array from a number for matching
@@ -54,10 +54,19 @@ Array.prototype.matches = function () {
   // cycle through matches
   for (var i = 0; i < arguments.length && arguments[i]; i++) {
     var currentPattern = getParametersWithDefaultValues(arguments[i])
+
     // empty array
     if (currentPattern.arguments.length === 0 && list.length === 0) {
       return currentPattern.function()
     }
+
+    // string
+    if (typeof list === 'string' || list instanceof String) {
+      if (currentPattern.arguments[0].value === list.toString()) {
+        return currentPattern.function(list)
+      }
+    }
+
     // single item array
     if (currentPattern.arguments.length === 1 && list.length === 1) {
       if (currentPattern.arguments[0].value === PATTERN_WITHOUT_VALUE || list[0] === currentPattern.arguments[0].value) {
