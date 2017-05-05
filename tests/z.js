@@ -1,4 +1,4 @@
-const should = require('chai').should()
+require('chai').should()
 const z = require('src/z')
 
 describe('z', () => {
@@ -47,6 +47,14 @@ describe('z', () => {
     result.should.equal(true)
   })
 
+  it('should match any type', () => {
+    const result = z(new Date())(
+      (x = Date) => true
+    )
+
+    result.should.equal(true)
+  })
+
   it('should match single item array', () => {
     const result = z([1])(
       (x) => x
@@ -63,6 +71,4 @@ describe('z', () => {
 
     result.should.equal(1)
   })
-
-
 })
