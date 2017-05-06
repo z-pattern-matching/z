@@ -80,11 +80,21 @@ describe('z', () => {
     result.should.deep.equal([1, 3, 4])
   })
 
-  it('should match tail array with comparsion at first argument', () => {
+  it('should match tail array with comparsion at tail argument', () => {
     const result = z([1, 2, 3])(
-      (x = 2, xs) => false,
-      (x = 1, xs) => true,
+      (x, xs = [1, 2]) => false,
+      (x, xs = [2, 3]) => true,
       (x, xs) => false
+    )
+
+    result.should.equal(true)
+  })
+
+  it('should match head array with comparsion at head argument', () => {
+    const result = z([1, 2, 3])(
+      (x, y = 1, xs) => false,
+      (x, y = 2 ,xs) => true,
+      (x, y, xs) => false
     )
 
     result.should.equal(true)

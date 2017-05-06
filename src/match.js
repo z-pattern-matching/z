@@ -1,6 +1,6 @@
 const deepEqual = require('deep-equal')
 
-  module.exports = (match, subjectToMatch) => {
+module.exports = (match, subjectToMatch) => {
   const hasMatchValue = match.args[0].length >= 2
   if(!hasMatchValue){
     return subjectToMatch
