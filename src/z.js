@@ -1,24 +1,26 @@
 const getMatchDetails = require('./getMatchDetails')
-const resolveMatchWithSingleArguments = require('./resolveMatchWithSingleArguments')
+const match = require('./match')
+const matchArray = require('./matchArray')
 
 const resolveMatchFunctions = (subjectToMatch, functions) => {
   for (let i = 0; i < functions.length; i++) {
     const currentMatch = getMatchDetails(functions[i])
 
     const matchHasSingleArgument = currentMatch.args.length === 1
-    // const matchHasMultipleArguments = currentMatch.args.length > 1
-
     if (matchHasSingleArgument) {
-      const singleValueResolve = resolveMatchWithSingleArguments(currentMatch, subjectToMatch)
+      const singleValueResolve = match(currentMatch, subjectToMatch)
       if (singleValueResolve) {
-        return singleValueResolve
+        return currentMatch.func(singleValueResolve)
       }
     }
 
-    /*
-    if(isMoreThanSingleItem){
-
-    } */
+    const matchHasMultipleArguments = currentMatch.args.length > 1
+    if(matchHasMultipleArguments && Array.isArray(subjectToMatch)){
+      const multipleItemResolve = matchArray(currentMatch, subjectToMatch)
+      if(multipleItemResolve){
+        return currentMatch.func.apply(null, multipleItemResolve)
+      }
+    }
   }
 }
 

@@ -57,18 +57,36 @@ describe('z', () => {
 
   it('should match single item array', () => {
     const result = z([1])(
-      (x) => x
+      (x = [1]) => x
     )
 
-    result.should.equal(1)
+    result.should.deep.equal([1])
   })
 
   it('should match single item array with comparsion', () => {
     const result = z([1])(
-      (x = 2) => false,
-      (x = 1) => x
+      (x = [2]) => false,
+      (x = [1]) => x
     )
 
-    result.should.equal(1)
+    result.should.deep.equal([1])
+  })
+
+  it('should match tail array', () => {
+    const result = z([1, 2, 3, 4])(
+      (x, y, xs) => [x].concat(xs)
+    )
+
+    result.should.deep.equal([1, 3, 4])
+  })
+
+  it('should match tail array with comparsion at first argument', () => {
+    const result = z([1, 2, 3])(
+      (x = 2, xs) => false,
+      (x = 1, xs) => true,
+      (x, xs) => false
+    )
+
+    result.should.equal(true)
   })
 })
