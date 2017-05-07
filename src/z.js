@@ -15,10 +15,14 @@ const resolveMatchFunctions = (subjectToMatch, functions) => {
     }
 
     const matchHasMultipleArguments = currentMatch.args.length > 1
-    if(matchHasMultipleArguments && Array.isArray(subjectToMatch)){
+    if (matchHasMultipleArguments && Array.isArray(subjectToMatch)) {
       const multipleItemResolve = matchArray(currentMatch, subjectToMatch)
-      if(multipleItemResolve){
+      if (Array.isArray(multipleItemResolve)) {
         return currentMatch.func.apply(null, multipleItemResolve)
+      }
+
+      if(multipleItemResolve){
+        return currentMatch.func(multipleItemResolve)
       }
     }
   }

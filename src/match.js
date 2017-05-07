@@ -8,11 +8,6 @@ module.exports = (match, subjectToMatch) => {
 
   const matchValue = match.args[0][1]
 
-  //if is instance check, check instance
-  if(typeof matchValue === "function" && subjectToMatch instanceof matchValue){
-    return subjectToMatch
-  }
-
   //if is a type check, check type
   if(matchValue === Boolean && typeof subjectToMatch === 'boolean') return subjectToMatch
   //TODO check these!
@@ -24,6 +19,10 @@ module.exports = (match, subjectToMatch) => {
   //if(matchValue === Symbol && typeof subjectToMatch === 'string') return subjectToMatch
   if(matchValue === Object && typeof subjectToMatch === 'object') return subjectToMatch
 
+  //if is instance check, check instance
+  if(typeof matchValue === "function" && subjectToMatch instanceof matchValue){
+    return subjectToMatch
+  }
 
   //if is object or array check, check deep equality
   if(typeof subjectToMatch === 'object'){

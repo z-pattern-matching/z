@@ -29,7 +29,7 @@ describe('z', () => {
     result.should.equal(2)
   })
 
-  it('should match single item with value comparsion', () => {
+  it('should match single item with value comparison', () => {
     const result = z(1)(
       (x = 2) => false,
       (x = 1) => true,
@@ -39,7 +39,17 @@ describe('z', () => {
     result.should.equal(true)
   })
 
-  it('should match type', () => {
+  it('should match exaclty string', () => {
+    const result = z('string')(
+      (x = 'stringo') => false,
+      (x = 'string') => true,
+      (x = 'stringi') => false
+    )
+
+    result.should.equal(true)
+  })
+
+  it('should match string type', () => {
     const result = z('string')(
       (x = String) => true
     )
@@ -47,7 +57,35 @@ describe('z', () => {
     result.should.equal(true)
   })
 
-  it('should match any type', () => {
+  it('should match bool type', () => {
+    const result = z(true)(
+      (x = Boolean) => true
+    )
+
+    result.should.equal(true)
+  })
+
+  it('should match number type', () => {
+    const result = z(1)(
+      (x = Boolean) => false,
+      (x = Number) => true,
+      (x = Number) => false
+    )
+
+    result.should.equal(true)
+  })
+
+  it('should match object type', () => {
+    const result = z({ a: 1 })(
+      //(x = Boolean) => false,
+      (x = Object) => true,
+      (x = Object) => false
+    )
+
+    result.should.equal(true)
+  })
+
+  it('should match instance', () => {
     const result = z(new Date())(
       (x = Date) => true
     )
@@ -93,10 +131,28 @@ describe('z', () => {
   it('should match head array with comparsion at head argument', () => {
     const result = z([1, 2, 3])(
       (x, y = 1, xs) => false,
-      (x, y = 2 ,xs) => true,
+      (x, y = 2, xs) => true,
       (x, y, xs) => false
     )
 
     result.should.equal(true)
+  })
+
+  it('should match if even with match has more arguments than subject', () => {
+    const result = z([1])(
+      (x, y, xs) => false,
+      (x) => x
+    )
+
+    result.should.deep.equal([1])
+  })
+
+  it('should extract array from head when has tail argument', () => {
+    const result = z([1])(
+      (x, y, xs) => false,
+      (x, xs = []) => x
+    )
+
+    result.should.equal(1)
   })
 })
