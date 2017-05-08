@@ -1,5 +1,6 @@
 require('chai').should()
 const z = require('src/z')
+const esprima = require('esprima')
 
 describe('z', () => {
   it('should match single item', () => {
@@ -124,7 +125,6 @@ describe('z', () => {
       (x, xs = [2, 3]) => true,
       (x, xs) => false
     )
-
     result.should.equal(true)
   })
 
@@ -151,6 +151,14 @@ describe('z', () => {
     const result = z([1])(
       (x, y, xs) => false,
       (x, xs = []) => x
+    )
+
+    result.should.equal(1)
+  })
+
+  it('should extract head value of array', () => {
+    const result = z([1, 2])(
+      (x = 1, xs) => x
     )
 
     result.should.equal(1)
