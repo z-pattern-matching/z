@@ -21,7 +21,7 @@ const resolveMatchFunctions = (subjectToMatch, functions) => {
         return currentMatch.func.apply(null, multipleItemResolve)
       }
 
-      if(multipleItemResolve){
+      if (multipleItemResolve) {
         return currentMatch.func(multipleItemResolve)
       }
     }

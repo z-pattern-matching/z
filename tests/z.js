@@ -1,6 +1,5 @@
 require('chai').should()
 const z = require('src/z')
-const esprima = require('esprima')
 
 describe('z', () => {
   it('should match single item', () => {
@@ -78,7 +77,7 @@ describe('z', () => {
 
   it('should match object type', () => {
     const result = z({ a: 1 })(
-      //(x = Boolean) => false,
+      // (x = Boolean) => false,
       (x = Object) => true,
       (x = Object) => false
     )

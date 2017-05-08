@@ -1,6 +1,5 @@
 require('chai').should()
 const z = require('src/z')
-const e = require('esprima')
 
 describe('old tests', function () {
   it('should map an array', function () {
@@ -59,14 +58,14 @@ describe('old tests', function () {
   it('should reverse a list with function', function () {
     const myReverse = (list) => z(list)(
       function (head, tail = []) { return [head] },
-      function (head, tail)      { return myReverse(tail).concat(head) }
+      function (head, tail) { return myReverse(tail).concat(head) }
     )
 
     myReverse([1, 2, 3, 4, 5]).should.eql([5, 4, 3, 2, 1])
   })
 
   it.skip('should match array of arrays', function () {
-    var matched = false;
+    var matched = false
 
     z([1, 2, [3]])(
       (x = Array) => {
@@ -91,7 +90,7 @@ describe('old tests', function () {
       (x = 'testa') => false,
       (x = 'test') => true,
       (x = 'testo') => false,
-      function otherwise() {
+      function otherwise () {
         return false
       }
     ).should.equal(true)
