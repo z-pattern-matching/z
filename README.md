@@ -34,8 +34,8 @@ matches(1)(
 
 ```javascript
 const reverse = (list) => matches(list)(
-  (head, tail = []) => [head], // stopping condition
-  (head, tail)      => myReverse(tail).concat(head)
+  (head, tail = [])    => [head], // stopping condition
+  (head, tail)         => reverse(tail).concat(head)
 )
 
 
