@@ -1,4 +1,4 @@
 module.exports = {
-  some: (value) => Object({value, hasValue: true}),
-  none: ()      => Object()
+  Some: (value) => Object({value, hasValue: true}),
+  None: ()      => Object()
 }

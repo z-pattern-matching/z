@@ -6,10 +6,10 @@ module.exports = (currentMatch, subjectToMatch) => {
 
   if(subjectToMatch.length < matchArgs.length) {
     if(deepEqual(matchArgs[matchArgs.length - 1].value, [])){
-      return option.some(subjectToMatch[0])
+      return option.Some(subjectToMatch[0])
     }
 
-    return option.none
+    return option.None
   }
 
   const heads = Array.from(Array(matchArgs.length - 1), (x, y) => subjectToMatch[y])
@@ -19,16 +19,16 @@ module.exports = (currentMatch, subjectToMatch) => {
   const [tailArg] = matchArgs.splice(matchArgs.length - 1, 1)
   if(tailArg.value) {
     if(!deepEqual(tailArg.value, tail)){
-      return option.none
+      return option.None
     }
   }
 
   const headsWithArgs = matchArgs.filter(x => x.value)
   for(let i = 0; i < headsWithArgs.length; i++){
     if(heads[headsWithArgs[i].index] !== headsWithArgs[i].value) {
-      return option.none
+      return option.None
     }
   }
 
-  return option.some(heads.concat([tail]))
+  return option.Some(heads.concat([tail]))
 }
