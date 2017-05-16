@@ -9,20 +9,20 @@ const resolveMatchFunctions = (subjectToMatch, functions) => {
     const matchHasSingleArgument = currentMatch.args.length === 1
     if (matchHasSingleArgument) {
       const singleValueResolve = match(currentMatch, subjectToMatch)
-      if (singleValueResolve) {
-        return currentMatch.func(singleValueResolve)
+      if (singleValueResolve.hasValue) {
+        return currentMatch.func(singleValueResolve.value)
       }
     }
 
     const matchHasMultipleArguments = currentMatch.args.length > 1
     if (matchHasMultipleArguments && Array.isArray(subjectToMatch)) {
       const multipleItemResolve = matchArray(currentMatch, subjectToMatch)
-      if (Array.isArray(multipleItemResolve)) {
-        return currentMatch.func.apply(null, multipleItemResolve)
+      if (multipleItemResolve.hasValue && Array.isArray(multipleItemResolve.value)) {
+        return currentMatch.func.apply(null, multipleItemResolve.value)
       }
 
-      if (multipleItemResolve) {
-        return currentMatch.func(multipleItemResolve)
+      if (multipleItemResolve.hasValue) {
+        return currentMatch.func(multipleItemResolve.value)
       }
     }
   }

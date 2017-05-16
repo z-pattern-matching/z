@@ -64,7 +64,7 @@ describe('old tests', function () {
     myReverse([1, 2, 3, 4, 5]).should.eql([5, 4, 3, 2, 1])
   })
 
-  it.skip('should match array of arrays', function () {
+  it('should match array of arrays', function () {
     var matched = false
 
     z([1, 2, [3]])(
