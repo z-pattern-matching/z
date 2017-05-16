@@ -162,4 +162,24 @@ describe('z', () => {
 
     result.should.equal(1)
   })
+
+  it('should match null', () => {
+    const result = z(null)(
+      (x = undefined) => false,
+      (x = null) => true,
+      (x = undefined) => false
+    )
+
+    result.should.equal(true)
+  })
+
+  it('should match undefined', () => {
+    const result = z(undefined)(
+      (x = null) => false,
+      (x = undefined) => true,
+      (x = null) => false
+    )
+
+    result.should.equal(true)
+  })
 })
