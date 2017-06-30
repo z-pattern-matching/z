@@ -101,6 +101,14 @@ describe('z', () => {
     result.should.deep.equal([1])
   })
 
+  it('should match array', () => {
+    const result = z([1])(
+      (x = Array) => x
+    )
+
+    result.should.deep.equal([1])
+  })
+
   it('should match single item array with comparsion', () => {
     const result = z([1])(
       (x = [2]) => false,
@@ -181,5 +189,37 @@ describe('z', () => {
     )
 
     result.should.equal(true)
+  })
+
+  it('should match array of array on head', () => {
+    const result = z([[1], [2]])(
+      (x = Array, xs) => xs
+    )
+
+    result.should.deep.equal([[2]])
+  })
+
+  it('should match array of array on tail', () => {
+    const result = z([[1], [2]])(
+      (x, xs = Array) => xs
+    )
+
+    result.should.deep.equal([[2]])
+  })
+
+  it('should match empty array of on head', () => {
+    const result = z([[], [2]])(
+      (x = [], xs) => xs
+    )
+
+    result.should.deep.equal([[2]])
+  })
+
+  it('should match empty array of on tail', () => {
+    const result = z([1, []])(
+      (x, xs = [[]]) => xs
+    )
+
+    result.should.deep.equal([[]])
   })
 })

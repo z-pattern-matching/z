@@ -1,5 +1,6 @@
 const deepEqual = require('deep-equal')
 const option = require('./option')
+const match = require('./match')
 
 module.exports = (currentMatch, subjectToMatch) => {
   const matchArgs = currentMatch.args.map((x, index) => Array.isArray(x) ? { key: x[0], value: x[1], index } : { key: x, index })
@@ -18,14 +19,19 @@ module.exports = (currentMatch, subjectToMatch) => {
   // CAUTION: it gets the tail arg and removes from matchArgs (due splice function)
   const [tailArg] = matchArgs.splice(matchArgs.length - 1, 1)
   if(tailArg.value) {
-    if(!deepEqual(tailArg.value, tail)){
+    const matchObject = { args: [[undefined, tailArg.value]] }
+    const matchResult = match(matchObject, tail)
+    if(matchResult === option.None) {
       return option.None
     }
   }
 
   const headsWithArgs = matchArgs.filter(x => x.value)
   for(let i = 0; i < headsWithArgs.length; i++){
-    if(heads[headsWithArgs[i].index] !== headsWithArgs[i].value) {
+    const matchObject = { args: [[headsWithArgs[i].key, headsWithArgs[i].value]] }
+
+    const matchResult = match(matchObject, heads[headsWithArgs[i].index])
+    if(matchResult === option.None) {
       return option.None
     }
   }
