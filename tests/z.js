@@ -206,4 +206,20 @@ describe('z', () => {
 
     result.should.deep.equal([[2]])
   })
+
+  it('should match empty array of on head', () => {
+    const result = z([[], [2]])(
+      (x = [], xs) => xs
+    )
+
+    result.should.deep.equal([[2]])
+  })
+
+  it('should match empty array of on tail', () => {
+    const result = z([1, []])(
+      (x, xs = [[]]) => xs
+    )
+
+    result.should.deep.equal([[]])
+  })
 })
