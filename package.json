@@ -8,7 +8,16 @@
     "test:watch": "npm test -- --watch",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "lint": "standard --fix \"src/z.js\" \"tests/*.js\"",
-    "coverage": "nyc npm test"
+    "coverage": "nyc npm test",
+    "prettier": "prettier --no-semi --single-quote --trailing-comma es5",
+    "format": "npm run prettier -- \"*(src|tests)/**/*.js\" --write",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": [
+      "yarn prettier -- --write",
+      "git add"
+    ]
   },
   "repository": {
     "type": "git",
@@ -55,9 +64,12 @@
   "devDependencies": {
     "chai": "^3.4.0",
     "coveralls": "^2.11.16",
+    "husky": "^0.14.3",
+    "lint-staged": "^4.0.1",
     "mocha": "^2.3.3",
     "mocha-lcov-reporter": "^1.2.0",
     "nyc": "^10.1.2",
+    "prettier": "^1.5.2",
     "standard": "^8.6.0"
   },
   "dependencies": {
