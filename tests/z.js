@@ -85,6 +85,16 @@ describe('z', () => {
     result.should.equal(true)
   })
 
+  it('should match on presence of keys in an object', () => {
+    const result = z({ a: 1 })(
+      // (x = Boolean) => false,
+      (x = { a: Number }) => true,
+      (x = Object) => false
+    )
+
+    result.should.equal(true)
+  })
+
   it('should match instance', () => {
     const result = z(new Date())(
       (x = Date) => true

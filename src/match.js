@@ -18,7 +18,20 @@ module.exports = (match, subjectToMatch) => {
   if(matchValue === String && typeof subjectToMatch === 'string') return option.Some(subjectToMatch)
   //TODO check it!
   //if(matchValue === Symbol && typeof subjectToMatch === 'string') return option.Some(subjectToMatch)
-  if(matchValue === Object && typeof subjectToMatch === 'object') return option.Some(subjectToMatch)
+
+  if(
+    matchValue === Object &&
+    typeof subjectToMatch === 'object'
+  ) {
+    return option.Some(subjectToMatch)
+  }
+
+  if (
+    typeof matchValue === 'object' &&
+    Object.keys(matchValue).every(x => typeof x === 'function')
+  ) {
+    console.log('we are in biz')
+  }
 
   //if is instance check, check instance
   if(typeof matchValue === "function" && subjectToMatch instanceof matchValue){

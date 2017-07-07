@@ -5,6 +5,7 @@
   "description": "pattern matching for javascript",
   "scripts": {
     "test": "NODE_PATH=. mocha tests/*.js",
+    "test:watch": "npm test -- --watch",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "lint": "standard --fix \"src/z.js\" \"tests/*.js\"",
     "coverage": "nyc npm test"
