@@ -8,7 +8,7 @@
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "lint": "standard --fix '**/*.js' | snazzy",
     "coverage": "nyc npm test",
-    "format": "prettier-std --write '**/*.js'"
+    "format": "prettier-std --write 'src/*.js'"
   },
   "repository": {
     "type": "git",
