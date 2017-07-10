@@ -2,6 +2,30 @@ require('chai').should()
 const z = require('src/z')
 
 describe('z', () => {
+  describe('destructured object matching', () => {
+    const defaultVal = 'default'
+    const common = [([a, b]) => false, x => defaultVal]
+    const arg = { x: 1, y: 1 }
+
+    it('should match on presence of keys in an object', () => {
+      const result = z(arg)(({ x }) => true, ...common)
+
+      result.should.equal(true)
+    })
+
+    it('should not match an object with missing keys', () => {
+      const result = z(arg)(({ x, z }) => x + z, ...common)
+
+      result.should.equal(defaultVal)
+    })
+
+    it('should pass object keys through to match function', () => {
+      const result = z(arg)(({ x, y }) => x + y, ...common)
+
+      result.should.equal(2)
+    })
+  })
+
   it('should match single item', () => {
     const result = z(1)(x => true, () => false)
 
@@ -59,21 +83,7 @@ describe('z', () => {
   })
 
   it('should match object type', () => {
-    const result = z({ a: 1 })(
-      // (x = Boolean) => false,
-      (x = Object) => true,
-      (x = Object) => false
-    )
-
-    result.should.equal(true)
-  })
-
-  it('should match on presence of keys in an object', () => {
-    const result = z({ a: 1 })(
-      // (x = Boolean) => false,
-      (x = { a: Number }) => true,
-      (x = Object) => false
-    )
+    const result = z({ a: 1 })((x = Object) => true, (x = Object) => false)
 
     result.should.equal(true)
   })
