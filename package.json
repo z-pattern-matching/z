@@ -4,7 +4,9 @@
   "main": "src/z.js",
   "description": "pattern matching for javascript",
   "scripts": {
-    "test": "NODE_PATH=. mocha tests/*.js",
+    "test": "NODE_PATH=. mocha src/*.spec.js",
+    "test:watch": "npm test -- --watch",
+    "test:min": "npm run test:watch -- --reporter min",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "lint": "standard --fix '**/*.js' | snazzy",
     "coverage": "nyc npm test",
@@ -55,6 +57,8 @@
   "devDependencies": {
     "chai": "^3.4.0",
     "coveralls": "^2.11.16",
+    "husky": "^0.14.3",
+    "lint-staged": "^4.0.1",
     "mocha": "^2.3.3",
     "mocha-lcov-reporter": "^1.2.0",
     "nyc": "^10.1.2",
@@ -64,6 +68,7 @@
   },
   "dependencies": {
     "deep-equal": "^1.0.1",
+    "flat": "^2.0.1",
     "install": "^0.10.0",
     "js-function-reflector": "git+https://github.com/leonardiwagner/js-function-reflector.git"
   }
