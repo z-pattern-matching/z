@@ -14,52 +14,54 @@ describe('old tests', function () {
   })
 
   it('should use 3 positions of pattern matching', function () {
-    var compress = (numbers) => z(numbers)(
-      (x, y, xs) => (x === y) ? compress([x].concat(xs)) : [x].concat(compress([y].concat(xs))),
-      (x, xs) => x // stopping condition
-    )
+    var compress = numbers =>
+      z(numbers)(
+        (x, y, xs) =>
+          x === y
+            ? compress([x].concat(xs))
+            : [x].concat(compress([y].concat(xs))),
+        (x, xs) => x // stopping condition
+      )
 
     compress([1, 1, 2, 3, 3, 3]).should.eql([1, 2, 3])
   })
 
   it('should map a constant', function () {
-    z('h')(
-      (x = 'h') => true,
-      (x) => false
-    ).should.equal(true)
+    z('h')((x = 'h') => true, x => false).should.equal(true)
   })
 
   it('should map a constant 2', function () {
-    z('a')(
-      (x = 'h') => true,
-      (x) => false
-    ).should.equal(false)
+    z('a')((x = 'h') => true, x => false).should.equal(false)
   })
 
   it('should map a constant 3', function () {
     var factorial = function (number) {
-      return z(number)(
-        function (x) {
-          return (x === 0) ? 1 : x * factorial(x - 1)
-        }
-      )
+      return z(number)(function (x) {
+        return x === 0 ? 1 : x * factorial(x - 1)
+      })
     }
   })
 
   it('should reverse a list', function () {
-    const myReverse = (list) => z(list)(
-      (head, tail = []) => [head],
-      (head, tail) => myReverse(tail).concat(head)
-    )
+    const myReverse = list =>
+      z(list)(
+        (head, tail = []) => [head],
+        (head, tail) => myReverse(tail).concat(head)
+      )
 
     myReverse([1, 2, 3, 4, 5]).should.eql([5, 4, 3, 2, 1])
   })
 
   it('should reverse a list with function', function () {
-    const myReverse = (list) => z(list)(
-      function (head, tail = []) { return [head] },
-      function (head, tail) { return myReverse(tail).concat(head) }
-    )
+    const myReverse = list =>
+      z(list)(
+        function (head, tail = []) {
+          return [head]
+        },
+        function (head, tail) {
+          return myReverse(tail).concat(head)
+        }
+      )
 
     myReverse([1, 2, 3, 4, 5]).should.eql([5, 4, 3, 2, 1])
   })
@@ -71,7 +73,7 @@ describe('old tests', function () {
       (x = Array) => {
         matched = true
       },
-      (x) => {
+      x => {
         console.log('here', x)
       }
     )
@@ -80,9 +82,7 @@ describe('old tests', function () {
   })
 
   it('should match a number', function () {
-    z(1)(
-      (x) => true
-    ).should.equal(true)
+    z(1)(x => true).should.equal(true)
   })
 
   it('should match a string', function () {

@@ -17,7 +17,10 @@ const resolveMatchFunctions = (subjectToMatch, functions) => {
     const matchHasMultipleArguments = currentMatch.args.length > 1
     if (matchHasMultipleArguments && Array.isArray(subjectToMatch)) {
       const multipleItemResolve = matchArray(currentMatch, subjectToMatch)
-      if (multipleItemResolve.hasValue && Array.isArray(multipleItemResolve.value)) {
+      if (
+        multipleItemResolve.hasValue &&
+        Array.isArray(multipleItemResolve.value)
+      ) {
         return currentMatch.func.apply(null, multipleItemResolve.value)
       }
 
@@ -28,8 +31,9 @@ const resolveMatchFunctions = (subjectToMatch, functions) => {
   }
 }
 
-module.exports = (subjectToMatch) => function () {
-  const functions = Object.keys(arguments).map((key) => arguments[key])
+module.exports = subjectToMatch =>
+  function () {
+    const functions = Object.keys(arguments).map(key => arguments[key])
 
-  return resolveMatchFunctions(subjectToMatch, functions)
-}
+    return resolveMatchFunctions(subjectToMatch, functions)
+  }
