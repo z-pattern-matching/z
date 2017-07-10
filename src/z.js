@@ -1,6 +1,8 @@
 const getMatchDetails = require('./getMatchDetails')
 const match = require('./match')
 const matchArray = require('./matchArray')
+const { hasDestructuredObjectArguments } = require('./utils')
+const { objectAndArgsDestructureMatches } = require('./matchObject')
 
 const resolveMatchFunctions = (subjectToMatch, functions) => {
   for (let i = 0; i < functions.length; i++) {
@@ -27,6 +29,13 @@ const resolveMatchFunctions = (subjectToMatch, functions) => {
       if (multipleItemResolve.hasValue) {
         return currentMatch.func(multipleItemResolve.value)
       }
+    }
+
+    if (
+      hasDestructuredObjectArguments(currentMatch.args) &&
+      objectAndArgsDestructureMatches(currentMatch.args, subjectToMatch)
+    ) {
+      return currentMatch.func(subjectToMatch)
     }
   }
 }
