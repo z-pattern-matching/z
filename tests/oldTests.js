@@ -24,18 +24,26 @@ describe('old tests', function () {
   })
 
   it('should map a constant', function () {
-    z('h')((x = 'h') => true, x => false).should.equal(true)
+    z('h')(
+      (x = 'h') => true,
+      (x) => false
+    ).should.equal(true)
   })
 
   it('should map a constant 2', function () {
-    z('a')((x = 'h') => true, x => false).should.equal(false)
+    z('a')(
+      (x = 'h') => true,
+      (x) => false
+    ).should.equal(false)
   })
 
   it('should map a constant 3', function () {
     var factorial = function (number) {
-      return z(number)(function (x) {
-        return x === 0 ? 1 : x * factorial(x - 1)
-      })
+      return z(number)(
+        function (x) {
+          return (x === 0) ? 1 : x * factorial(x - 1)
+        }
+      )
     }
   })
 
@@ -52,12 +60,8 @@ describe('old tests', function () {
   it('should reverse a list with function', function () {
     const myReverse = list =>
       z(list)(
-        function (head, tail = []) {
-          return [head]
-        },
-        function (head, tail) {
-          return myReverse(tail).concat(head)
-        }
+        function (head, tail = []) { return [head] },
+        function (head, tail) { return myReverse(tail).concat(head) }
       )
 
     myReverse([1, 2, 3, 4, 5]).should.eql([5, 4, 3, 2, 1])
@@ -67,15 +71,21 @@ describe('old tests', function () {
     var matched = false
 
     z([1, 2, [3]])(
-      (x = Array) => { (matched = true) },
-      (x) => { console.log('here', x) }
+      (x = Array) => {
+        (matched = true)
+      },
+      (x) => {
+        console.log('here', x)
+      }
     )
 
     matched.should.eql(true)
   })
 
   it('should match a number', function () {
-    z(1)(x => true).should.equal(true)
+    z(1)(
+      (x) => true
+    ).should.equal(true)
   })
 
   it('should match a string', function () {
