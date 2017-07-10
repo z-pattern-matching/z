@@ -23,7 +23,7 @@ describe('z', () => {
 
   it('should execute function when matches occurs', () => {
     const result = z(1)(
-      (x) => (1 + x)
+      (x) => 1 + x
     )
 
     result.should.equal(2)
@@ -147,8 +147,7 @@ describe('z', () => {
 
   it('should match if even with match has more arguments than subject', () => {
     const result = z([1])(
-      (x, y, xs) => false,
-      (x) => x
+      (x, y, xs) => false, x => x
     )
 
     result.should.deep.equal([1])

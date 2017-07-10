@@ -14,10 +14,11 @@ describe('old tests', function () {
   })
 
   it('should use 3 positions of pattern matching', function () {
-    var compress = (numbers) => z(numbers)(
-      (x, y, xs) => (x === y) ? compress([x].concat(xs)) : [x].concat(compress([y].concat(xs))),
-      (x, xs) => x // stopping condition
-    )
+    var compress = numbers =>
+      z(numbers)(
+        (x, y, xs) => x === y ? compress([x].concat(xs)) : [x].concat(compress([y].concat(xs))),
+        (x, xs) => x // stopping condition
+      )
 
     compress([1, 1, 2, 3, 3, 3]).should.eql([1, 2, 3])
   })
@@ -47,19 +48,21 @@ describe('old tests', function () {
   })
 
   it('should reverse a list', function () {
-    const myReverse = (list) => z(list)(
-      (head, tail = []) => [head],
-      (head, tail) => myReverse(tail).concat(head)
-    )
+    const myReverse = list =>
+      z(list)(
+        (head, tail = []) => [head],
+        (head, tail) => myReverse(tail).concat(head)
+      )
 
     myReverse([1, 2, 3, 4, 5]).should.eql([5, 4, 3, 2, 1])
   })
 
   it('should reverse a list with function', function () {
-    const myReverse = (list) => z(list)(
-      function (head, tail = []) { return [head] },
-      function (head, tail) { return myReverse(tail).concat(head) }
-    )
+    const myReverse = list =>
+      z(list)(
+        function (head, tail = []) { return [head] },
+        function (head, tail) { return myReverse(tail).concat(head) }
+      )
 
     myReverse([1, 2, 3, 4, 5]).should.eql([5, 4, 3, 2, 1])
   })
@@ -69,7 +72,7 @@ describe('old tests', function () {
 
     z([1, 2, [3]])(
       (x = Array) => {
-        matched = true
+        (matched = true)
       },
       (x) => {
         console.log('here', x)

@@ -6,8 +6,9 @@
   "scripts": {
     "test": "NODE_PATH=. mocha tests/*.js",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
-    "lint": "standard --fix \"src/z.js\" \"tests/*.js\"",
-    "coverage": "nyc npm test"
+    "lint": "standard --fix '**/*.js' | snazzy",
+    "coverage": "nyc npm test",
+    "format": "prettier-std --write 'src/*.js'"
   },
   "repository": {
     "type": "git",
@@ -57,6 +58,8 @@
     "mocha": "^2.3.3",
     "mocha-lcov-reporter": "^1.2.0",
     "nyc": "^10.1.2",
+    "prettier-std-cli": "^1.0.0",
+    "snazzy": "^7.0.0",
     "standard": "^8.6.0"
   },
   "dependencies": {
