@@ -59,3 +59,9 @@ Why **z** was created? Because *IT'S B E A U T I F U L*: No need to install noth
 ### The project is new and growing!
 
 Suggestions, bug reports and pull requests are welcomed!
+
+### License
+
+[Apache 2.0][apache-license]
+
+[apache-license]:./LICENSE
