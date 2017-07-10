@@ -16,10 +16,7 @@ describe('old tests', function () {
   it('should use 3 positions of pattern matching', function () {
     var compress = numbers =>
       z(numbers)(
-        (x, y, xs) =>
-          x === y
-            ? compress([x].concat(xs))
-            : [x].concat(compress([y].concat(xs))),
+        (x, y, xs) => x === y ? compress([x].concat(xs)) : [x].concat(compress([y].concat(xs))),
         (x, xs) => x // stopping condition
       )
 
@@ -70,12 +67,8 @@ describe('old tests', function () {
     var matched = false
 
     z([1, 2, [3]])(
-      (x = Array) => {
-        matched = true
-      },
-      x => {
-        console.log('here', x)
-      }
+      (x = Array) => { (matched = true) },
+      (x) => { console.log('here', x) }
     )
 
     matched.should.eql(true)
