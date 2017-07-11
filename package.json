@@ -4,7 +4,7 @@
   "main": "src/z.js",
   "description": "pattern matching for javascript",
   "scripts": {
-    "test": "NODE_PATH=. mocha src/*.spec.js",
+    "test": "NODE_PATH=. mocha **/*.spec.js",
     "test:watch": "npm test -- --watch",
     "test:min": "npm run test:watch -- --reporter min",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
@@ -46,7 +46,7 @@
     ],
     "exclude": [
       "node_modules/**/*",
-      "tests/*"
+      "**/*.spec.js"
     ]
   },
   "bugs": {

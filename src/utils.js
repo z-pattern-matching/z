@@ -37,5 +37,5 @@ module.exports = {
   checkArray,
   containsAll,
   compose,
-  isChar,
+  isChar
 }

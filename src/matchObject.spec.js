@@ -1,7 +1,7 @@
 require('chai').should()
 const {
   getFlattenedKeysFromArgs,
-  objectAndArgsDestructureMatches,
+  objectAndArgsDestructureMatches
 } = require('./matchObject')
 
 // declared as a single string for readability here
@@ -18,7 +18,7 @@ describe('matchObject', () => {
         'b.c',
         'b.d',
         'b.e.f',
-        'b.g',
+        'b.g'
       ])
     })
   })
@@ -27,7 +27,7 @@ describe('matchObject', () => {
     it('should match an object with extra keys to a spec with less', () => {
       objectAndArgsDestructureMatches(parsedArgs, {
         a: 1,
-        b: { c: 1, d: 1, e: { f: 1 }, g: 1 },
+        b: { c: 1, d: 1, e: { f: 1 }, g: 1 }
       }).should.equal(true)
     })
 

@@ -15,6 +15,7 @@ const buildSpecFromReflectedArgs = str =>
       // add a opening quote to keynames that are missing them
       case isChar(curr) && !isChar(str.charAt(i - 1)):
       // add a closing quote to keynames that are missing them
+      /* falls through */
       case curr === ':' && str.charAt(i - 1) !== '"':
         return res.concat('"').concat(curr)
 
@@ -45,5 +46,5 @@ const objectAndArgsDestructureMatches = (reflectedArgs, subjectToMatch) =>
 
 module.exports = {
   getFlattenedKeysFromArgs,
-  objectAndArgsDestructureMatches,
+  objectAndArgsDestructureMatches
 }

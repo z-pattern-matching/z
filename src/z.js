@@ -31,6 +31,7 @@ const resolveMatchFunctions = (subjectToMatch, functions) => {
       }
     }
 
+
     if (
       hasDestructuredObjectArguments(currentMatch.args) &&
       objectAndArgsDestructureMatches(currentMatch.args, subjectToMatch)
