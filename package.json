@@ -46,7 +46,8 @@
     ],
     "exclude": [
       "node_modules/**/*",
-      "**/*.spec.js"
+      "**/*.spec.js",
+      "src/utils.js"
     ]
   },
   "bugs": {

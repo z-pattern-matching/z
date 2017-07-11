@@ -33,8 +33,6 @@ describe('arrays', () => {
     result.should.deep.equal([1, 3, 4])
   })
 
-
-
   it('should match if even with match has more arguments than subject', () => {
     const result = z([1])(
       (x, y, xs) => false, x => x
