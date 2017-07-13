@@ -6,7 +6,6 @@
   "scripts": {
     "test": "mocha tests/*.js",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
-    "lint": "standard --fix \"src/z.js\" \"tests/*.js\"",
     "coverage": "nyc npm test"
   },
   "repository": {
@@ -31,10 +30,10 @@
     ]
   },
   "nyc": {
-    "statements": 100,
-    "branches": 97.37,
-    "functions": 100,
-    "lines": 100,
+    "statements": 90,
+    "branches": 75,
+    "functions": 90,
+    "lines": 90,
     "check-coverage": true,
     "reporter": [
       "lcov",
@@ -56,7 +55,6 @@
     "coveralls": "^2.11.16",
     "mocha": "^2.3.3",
     "mocha-lcov-reporter": "^1.2.0",
-    "nyc": "^10.1.2",
-    "standard": "^8.6.0"
+    "nyc": "^10.1.2"
   }
 }

@@ -48,8 +48,9 @@ Number.prototype.matches = function () {
   return arrayOfNumber.matches.apply(arrayOfNumber, arguments)
 }
 
+
 // the great matching function!
-Array.prototype.matches = function () {
+function matches() {
   var list = this
   // cycle through matches
   for (var i = 0; i < arguments.length && arguments[i]; i++) {
@@ -104,6 +105,8 @@ Array.prototype.matches = function () {
   throw new Error('Match error: can\'t match anything for: ' + this)
 }
 
+Array.prototype.matches = matches
+
 // helper methods
 Array.prototype.head = function () {
   return this.matches(
@@ -130,4 +133,8 @@ Array.prototype.init = function () {
   )
 }
 
-module.exports = Array
+module.exports = function(matchItem){
+  return function(patternsToMatch){
+    return matches.apply(matchItem, arguments)
+  }
+}
