@@ -72,5 +72,8 @@
     "flat": "^2.0.1",
     "install": "^0.10.0",
     "js-function-reflector": "git+https://github.com/leonardiwagner/js-function-reflector.git"
+  },
+  "engines": {
+    "node": ">= 6.0.0"
   }
 }
