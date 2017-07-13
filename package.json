@@ -1,6 +1,6 @@
 {
   "name": "z",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "main": "src/z.js",
   "description": "pattern matching for javascript",
   "scripts": {
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/leonardiwagner/z.git..git"
+    "url": "git+https://github.com/z-pattern-matching/z"
   },
   "author": "Wagner Leonardi",
   "keywords": [
@@ -46,9 +46,9 @@
     ]
   },
   "bugs": {
-    "url": "https://github.com/leonardiwagner/z.git./issues"
+    "url": "https://github.com/z-pattern-matching/z.git./issues"
   },
-  "homepage": "https://github.com/leonardiwagner/z.git.#readme",
+  "homepage": "https://github.com/z-pattern-matching/z.git.#readme",
   "license": "Apache-2.0",
   "devDependencies": {
     "chai": "^3.4.0",
