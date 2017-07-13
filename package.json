@@ -56,5 +56,8 @@
     "mocha": "^2.3.3",
     "mocha-lcov-reporter": "^1.2.0",
     "nyc": "^10.1.2"
+  },
+  "engines": {
+    "node": "< 6.0.0"
   }
 }
