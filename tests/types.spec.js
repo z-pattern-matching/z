@@ -13,13 +13,17 @@ describe('types', () => {
   })
 
   it('should match string type', () => {
-    const result = z('string')((x = String) => true)
+    const result = z('string')(
+      (x = String) => true
+    )
 
     result.should.equal(true)
   })
 
   it('should match bool type', () => {
-    const result = z(true)((x = Boolean) => true)
+    const result = z(true)(
+      (x = Boolean) => true
+    )
 
     result.should.equal(true)
   })
@@ -35,25 +39,34 @@ describe('types', () => {
   })
 
   it('should match object type', () => {
-    const result = z({ a: 1 })((x = Object) => true, (x = Object) => false)
+    const result = z({ a: 1 })(
+      (x = Object) => true,
+      (x = Object) => false
+    )
 
     result.should.equal(true)
   })
 
   it('should match instance', () => {
-    const result = z(new Date())((x = Date) => true)
+    const result = z(new Date())(
+      (x = Date) => true
+    )
 
     result.should.equal(true)
   })
 
   it('should match single item array', () => {
-    const result = z([1])((x = [1]) => x)
+    const result = z([1])(
+      (x = [1]) => x
+    )
 
     result.should.deep.equal([1])
   })
 
   it('should match array', () => {
-    const result = z([1])((x = Array) => x)
+    const result = z([1])(
+      (x = Array) => x
+    )
 
     result.should.deep.equal([1])
   })

@@ -1,10 +1,10 @@
 const functionReflector = require('js-function-reflector')
 
-module.exports = func => {
-  const reflectedFunction = functionReflector(func)
+module.exports = (matchFunction) => {
+  const reflectedFunction = functionReflector(matchFunction)
 
   return {
     args: reflectedFunction.args,
-    func
+    func: matchFunction
   }
 }

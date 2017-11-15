@@ -2,7 +2,7 @@ require('chai').should()
 const {
   getFlattenedKeysFromArgs,
   objectAndArgsDestructureMatches
-} = require('./matchObject')
+} = require('../src/matchObject')
 
 // declared as a single string for readability here
 // but the reflection lib will hand it over as the

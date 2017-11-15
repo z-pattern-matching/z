@@ -13,8 +13,6 @@ module.exports = (match, subjectToMatch) => {
   if (matchValue === Boolean && typeof subjectToMatch === 'boolean') {
     return option.Some(subjectToMatch)
   }
-  // TODO check these!
-  // if(matchValue === Null && typeof subjectToMatch === 'string') return option.Some(subjectToMatch)
   if (matchValue === undefined && typeof subjectToMatch === 'undefined') {
     return option.Some(subjectToMatch)
   }
@@ -24,8 +22,6 @@ module.exports = (match, subjectToMatch) => {
   if (matchValue === String && typeof subjectToMatch === 'string') {
     return option.Some(subjectToMatch)
   }
-  // TODO check it!
-  // if(matchValue === Symbol && typeof subjectToMatch === 'string') return option.Some(subjectToMatch)
   if (matchValue === Object && typeof subjectToMatch === 'object') {
     return option.Some(subjectToMatch)
   }
