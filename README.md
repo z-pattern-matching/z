@@ -6,59 +6,83 @@
 [![NPM version](https://img.shields.io/npm/v/z.svg)](https://www.npmjs.com/package/z)
 
 ### Usage
-- install via npm: `npm install z`
-- require `z` in your code, and name the match function as you want!
-```javascript
-const matches = require('z')
-```
+- Install via npm: `npm install z`
+- Require z in your code and use the matches function: `const { matches } = require('z')`
 
-- you can match by comparing values
+### Avaiable Patterns
+
+- Matches by value: `(x = 1) =>, (x = null) =>, (x = 'true') =>`
+- Matches by object or array: `(x = {a: 1}) =>, (x = [1, 2]) =>`
+- Matches by type: `(x = String) =>, (x = Boolean) =>`
+- Matches by instance: `(x = Date) =>, (x = Person) =>`
+- Matches by spiting array into elements and tail `(head, tail) =>` , `(a, b, c, tail) =>`, etc…
+
+
+### Examples
+- **Example:** Matches by Object property
 ```javascript
-const person = { name: 'Johna' }
+const { matches } = require('z')
+
+const person = { name: 'Maria' }
 matches(person)(
   (x = { name: 'John' }) => console.log('John you are not welcome!'),
   (x)                    => console.log(`Hey ${x.name}, you are welcome!`)
 )
+
+//output: `Hey Maria, you are welcome!`
 ```
 
-- you can match by comparing types or instances
+- **Example:** Matches by type or instances
 ```javascript
-matches(1)(
-  (x = 2)      => console.log(`number 2 is the best!!!`),
-  (x = Number) => console.log(`number ${x} is not that good`),
-  (x = Date) => console.log(`blaa.. strings are awful!`)
+const { matches } = require('z')
+
+const result = matches(1)(
+  (x = 2)      => 'number 2 is the best!!!',
+  (x = Number) => `number ${x} is not that good`,
+  (x = Date)   => 'blaa.. dates are awful!'
+)
+
+console.log(result) // output: number 1 is not that good
+```
+
+- **Example:** matches Array content
+
+> To match array content you need create multiple arguments for the match function, such as (a, b, c, tail) => {} , then each variable match each item from array. Note: last variable contains all remaining array items, formally named tail. Examples:
+```javascript
+const { matches } = require('z')
+
+matches([1, 2, 3, 4, 5])(
+  (a, b, c, tail) => 'a = 1, b = 2, c = 3, tail = [4, 5]'  
+)
+
+matches([1, 2])(
+  (a, tail) => 'a = 1, b = [2]'  
+)
+
+matches([1])(
+  (a, b,  tail)      => 'Will not match here',
+  (a = 2, tail = []) => 'Will not match here',
+  (a = 1, tail)      => 'Will match here, b = []'
 )
 ```
 
-- on arrays, you can split head and tail, so you can do awesome recurring functions! , without manipulating arrays or changing state. Yes true functional programming in JavaScript!
+- **Example:** Powerful recursive code which will remove sequential repeated items from Array.
 
+> Can be mind blowing if it’s the first time you meet pattern matching, but you are gonna understand it!
 ```javascript
-const reverse = (list) => matches(list)(
-  (head, tail = [])    => [head], // stopping condition
-  (head, tail)         => reverse(tail).concat(head)
-)
+const { matches } = require('z')
 
+const compress = (numbers) => {
+  return matches(numbers)(
+    (x, y, xs) => x === y
+      ? compress([x].concat(xs))
+      : [x].concat(compress([y].concat(xs))),
+    (x, xs) => x // stopping condition
+  )
+}
 
-reverse([1, 2, 3, 4])) // returns [4, 3, 2, 1]
+compress([1, 1, 2, 3, 4, 4, 4]) //output: [1, 2, 3]
 ```
-
-### Available Patterns
-
-- Matches by value: `(x = 1) =>`, `(x = null) =>`, `(x = 'true') =>`
-- Matches by `object` and `array`: `(x = {a: 1}) =>`, `(x = [1, 2]) =>`
-- Matches by `type`: `(x = String) =>`, `(x = Boolean) =>`
-- Matches by `instance`: `(x = Date) =>`, `(x = Person) =>`
-- Matches spiting array into head and tail `(head, tail) =>`, it can be multiple heads, eg.: `(x, y, z, xs)`, `(a, b, c, d, e, f, g, tail)`, etc...
-
-### This is amazing! Why nobody did this before on JavaScript?
-
-[He did](https://github.com/natefaubion), years ago! But [his first and greater Javascript pattern match library](https://github.com/natefaubion/matches.js) create matches with strings, and this is ugly! (sorry). Maybe he thought this is ugly too and [he did a new pattern matching library](https://github.com/natefaubion/sparkler) without strings, but need to install some macro stuff.. and well, I don't think that's nice either.
-
-Why **z** was created? Because *IT'S B E A U T I F U L*: No need to install nothing but the actual **z** library, the matches are real native javascript code, the patterns are written naturally, pure :heart:.
-
-### The project is new and growing!
-
-Suggestions, bug reports and pull requests are welcomed!
 
 ### License
 
