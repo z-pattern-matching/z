@@ -1,9 +1,9 @@
 require('chai').should()
-const z = require('src/z')
+const { matches } = require('src/z')
 
 describe('types', () => {
   it('should match exaclty string', () => {
-    const result = z('string')(
+    const result = matches('string')(
       (x = 'stringo') => false,
       (x = 'string') => true,
       (x = 'stringi') => false
@@ -13,7 +13,7 @@ describe('types', () => {
   })
 
   it('should match string type', () => {
-    const result = z('string')(
+    const result = matches('string')(
       (x = String) => true
     )
 
@@ -21,7 +21,7 @@ describe('types', () => {
   })
 
   it('should match bool type', () => {
-    const result = z(true)(
+    const result = matches(true)(
       (x = Boolean) => true
     )
 
@@ -29,7 +29,7 @@ describe('types', () => {
   })
 
   it('should match number type', () => {
-    const result = z(1)(
+    const result = matches(1)(
       (x = Boolean) => false,
       (x = Number) => true,
       (x = Number) => false
@@ -39,7 +39,7 @@ describe('types', () => {
   })
 
   it('should match object type', () => {
-    const result = z({ a: 1 })(
+    const result = matches({ a: 1 })(
       (x = Object) => true,
       (x = Object) => false
     )
@@ -48,7 +48,7 @@ describe('types', () => {
   })
 
   it('should match instance', () => {
-    const result = z(new Date())(
+    const result = matches(new Date())(
       (x = Date) => true
     )
 
@@ -56,7 +56,7 @@ describe('types', () => {
   })
 
   it('should match single item array', () => {
-    const result = z([1])(
+    const result = matches([1])(
       (x = [1]) => x
     )
 
@@ -64,7 +64,7 @@ describe('types', () => {
   })
 
   it('should match array', () => {
-    const result = z([1])(
+    const result = matches([1])(
       (x = Array) => x
     )
 
@@ -72,7 +72,7 @@ describe('types', () => {
   })
 
   it('should match null', () => {
-    const result = z(null)(
+    const result = matches(null)(
       (x = undefined) => false,
       (x = null) => true,
       (x = undefined) => false
@@ -82,7 +82,7 @@ describe('types', () => {
   })
 
   it('should match undefined', () => {
-    const result = z(undefined)(
+    const result = matches(undefined)(
       (x = null) => false,
       (x = undefined) => true,
       (x = null) => false

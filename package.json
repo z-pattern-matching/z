@@ -7,10 +7,10 @@
     "test": "NODE_PATH=. mocha **/*.spec.js",
     "test:watch": "npm test -- --watch",
     "test:min": "npm run test:watch -- --reporter min",
-    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "lint": "standard --fix '**/*.js' | snazzy",
     "coverage": "nyc npm test",
-    "format": "prettier-std --write 'src/*.js'"
+    "format": "prettier-std --write 'src/*.js'",
+    "build": "npm run lint && npm test && npm run coverage"
   },
   "repository": {
     "type": "git",

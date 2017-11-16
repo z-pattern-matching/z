@@ -1,10 +1,10 @@
 require('chai').should()
-const z = require('src/z')
+const { matches } = require('src/z')
 
 describe('old tests', function () {
   it('should map an array', function () {
     var $map = (numbers, f) => {
-      return z(numbers)(
+      return matches(numbers)(
         (_, xs = []) => [],
         (x, xs) => [f(x)].concat(xs.map(f))
       )
@@ -15,7 +15,7 @@ describe('old tests', function () {
 
   it('should use 3 positions of pattern matching', function () {
     var compress = numbers =>
-      z(numbers)(
+      matches(numbers)(
         (x, y, xs) => x === y ? compress([x].concat(xs)) : [x].concat(compress([y].concat(xs))),
         (x, xs) => x // stopping condition
       )
@@ -24,14 +24,14 @@ describe('old tests', function () {
   })
 
   it('should map a constant', function () {
-    z('h')(
+    matches('h')(
       (x = 'h') => true,
       (x) => false
     ).should.equal(true)
   })
 
   it('should map a constant 2', function () {
-    z('a')(
+    matches('a')(
       (x = 'h') => true,
       (x) => false
     ).should.equal(false)
@@ -39,7 +39,7 @@ describe('old tests', function () {
 
   it('should map a constant 3', function () {
     var factorial = function (number) {
-      return z(number)(
+      return matches(number)(
         function (x) {
           return (x === 0) ? 1 : x * factorial(x - 1)
         }
@@ -49,7 +49,7 @@ describe('old tests', function () {
 
   it('should reverse a list', function () {
     const myReverse = list =>
-      z(list)(
+      matches(list)(
         (head, tail = []) => [head],
         (head, tail) => myReverse(tail).concat(head)
       )
@@ -59,7 +59,7 @@ describe('old tests', function () {
 
   it('should reverse a list with function', function () {
     const myReverse = list =>
-      z(list)(
+      matches(list)(
         function (head, tail = []) { return [head] },
         function (head, tail) { return myReverse(tail).concat(head) }
       )
@@ -70,7 +70,7 @@ describe('old tests', function () {
   it('should match array of arrays', function () {
     var matched = false
 
-    z([1, 2, [3]])(
+    matches([1, 2, [3]])(
       (x = Array) => {
         (matched = true)
       },
@@ -83,13 +83,13 @@ describe('old tests', function () {
   })
 
   it('should match a number', function () {
-    z(1)(
+    matches(1)(
       (x) => true
     ).should.equal(true)
   })
 
   it('should match a string', function () {
-    z('test')(
+    matches('test')(
       (x = 'testa') => false,
       (x = 'test') => true,
       (x = 'testo') => false,
