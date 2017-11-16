@@ -2,5 +2,4 @@ language: node_js
 node_js:
   - "6.2"
 script:
-  - npm run lint
-  - npm run coveralls
+  - npm run build
