@@ -57,6 +57,26 @@ describe('arrays', () => {
     result.should.equal(10)
   })
 
+  it('should properly null elemnt on array when its not present', () => {
+    const result = matches([1, 2, 3])(
+      (x, y, xs, zs) => false,
+      (x = 1, y = null, z = 3, xs = []) => 11,
+      (x, xs) => 10
+    )
+
+    result.should.equal(10)
+  })
+
+  it('should properly null elemnt on array when its present', () => {
+    const result = matches([1, null, 3])(
+      (x, y, xs, zs) => false,
+      (x = 1, y = null, zs) => 11,
+      (x, xs) => 10
+    )
+
+    result.should.equal(11)
+  })
+
   it('should extract array from head when has tail argument', () => {
     const result = matches([1])(
       (x, y, xs) => false,

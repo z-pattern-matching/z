@@ -9,7 +9,7 @@ module.exports = (currentMatch, subjectToMatch) => {
   )
 
   if (subjectToMatch.length < matchArgs.length) {
-    const matchOnSubArg = (arg, toMatch) => arg.value
+    const matchOnSubArg = (arg, toMatch) => 'value' in arg
       ? deepEqual(arg.value, toMatch)
       : true
 
