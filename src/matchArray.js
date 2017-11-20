@@ -17,8 +17,7 @@ module.exports = (currentMatch, subjectToMatch) => {
       .slice(0, matchArgs.length - 1)
       .every((arg, index) => matchOnSubArg(arg, subjectToMatch[index]))
 
-    if (deepEqual(matchArgs[matchArgs.length - 1].value, [])
-        && matchAllSubArgs) {
+    if (deepEqual(matchArgs[matchArgs.length - 1].value, []) && matchAllSubArgs) {
       return option.Some(subjectToMatch[0])
     }
 
