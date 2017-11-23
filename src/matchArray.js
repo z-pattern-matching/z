@@ -9,7 +9,15 @@ module.exports = (currentMatch, subjectToMatch) => {
   )
 
   if (subjectToMatch.length < matchArgs.length) {
-    if (deepEqual(matchArgs[matchArgs.length - 1].value, [])) {
+    const matchOnSubArg = (arg, toMatch) => 'value' in arg
+      ? deepEqual(arg.value, toMatch)
+      : true
+
+    const matchAllSubArgs = matchArgs
+      .slice(0, matchArgs.length - 1)
+      .every((arg, index) => matchOnSubArg(arg, subjectToMatch[index]))
+
+    if (matchAllSubArgs && deepEqual(matchArgs[matchArgs.length - 1].value, [])) {
       return option.Some(subjectToMatch[0])
     }
 
