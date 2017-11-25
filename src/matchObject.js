@@ -6,7 +6,7 @@ const { checkArray, compose, containsAll, isChar } = require('./utils')
 // function argument reflection, that object can then
 // be used to check the keys of the subjectToMatch
 const buildSpecFromReflectedArgs = str =>
-  str.split('').reduce((res, curr, i) => {
+  [...str].reduce((res, curr, i) => {
     switch (true) {
       // add a dummy value when a key without a value is found
       case /(,|})/.test(curr) && isChar(str.charAt(i - 1)):
