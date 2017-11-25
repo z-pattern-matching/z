@@ -40,11 +40,7 @@ const resolveMatchFunctions = (subjectToMatch, functions) => {
   }
 }
 
-const matches = (subjectToMatch) =>
-  function () {
-    const functions = Object.keys(arguments).map(key => arguments[key])
-
-    return resolveMatchFunctions(subjectToMatch, functions)
-  }
+const matches = (subjectToMatch) => (...functions) =>
+  resolveMatchFunctions(subjectToMatch, functions)
 
 module.exports = { matches }
