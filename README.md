@@ -62,7 +62,7 @@ matches([1, 2])(
 matches([1])(
   (a, b,  tail)       => 'Will not match here',
   (a = 2, tail = [])  => 'Will not match here',
-  (a = 1, tail = [])  => 'Will match here, b = []'
+  (a = 1, tail = [])  => 'Will match here, tail = []'
 )
 ```
 
