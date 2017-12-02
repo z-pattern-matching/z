@@ -15,7 +15,7 @@
 - Matches by object or array: `(x = {a: 1}) =>, (x = [1, 2]) =>`
 - Matches by type: `(x = String) =>, (x = Boolean) =>`
 - Matches by instance: `(x = Date) =>, (x = Person) =>`
-- Matches by spiting array into elements and tail `(head, tail) =>` , `(a, b, c, tail) =>`, etc…
+- Matches by splitting array into elements and tail `(head, tail) =>` , `(a, b, c, tail) =>`, etc…
 
 
 ### Examples
