@@ -1,6 +1,6 @@
 {
   "name": "z",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "src/z.js",
   "description": "native pattern matching for javascript",
   "scripts": {
