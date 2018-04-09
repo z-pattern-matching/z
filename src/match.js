@@ -1,4 +1,5 @@
 const deepEqual = require('deep-equal')
+const objectEquals = require('./objectEquals')
 const option = require('./option')
 
 module.exports = (match, subjectToMatch) => {
@@ -34,9 +35,19 @@ module.exports = (match, subjectToMatch) => {
     return option.Some(subjectToMatch)
   }
 
-  // if is object or array check, check deep equality
-  if (typeof subjectToMatch === 'object' && subjectToMatch !== null) {
+  // if its array
+  if(
+    subjectToMatch instanceof Array &&
+    matchValue instanceof Array
+  ) {
     if (deepEqual(subjectToMatch, matchValue)) {
+      return option.Some(subjectToMatch)
+    }
+  }
+
+  // if is object (and not an array), check if contains
+  if (typeof subjectToMatch === 'object' && subjectToMatch !== null && !(subjectToMatch instanceof Array)) {
+    if(objectEquals(matchValue, subjectToMatch)){
       return option.Some(subjectToMatch)
     }
   }
