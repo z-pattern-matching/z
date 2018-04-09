@@ -41,7 +41,7 @@ describe('objectEquals', () => {
     const objectA = {
       data: {
         id: {
-          security : '123'
+          security: '123'
         }
       }
     }
@@ -51,7 +51,7 @@ describe('objectEquals', () => {
       data: {
         age: 18,
         id: {
-          security : '123'
+          security: '123'
         }
       }
     }
@@ -63,7 +63,7 @@ describe('objectEquals', () => {
     const objectA = {
       data: {
         id: {
-          security : ['123', 3]
+          security: ['123', 3]
         }
       }
     }
@@ -73,7 +73,7 @@ describe('objectEquals', () => {
       data: {
         age: 18,
         id: {
-          security : ['123', 2]
+          security: ['123', 2]
         }
       }
     }
@@ -85,7 +85,7 @@ describe('objectEquals', () => {
     const objectA = {
       data: {
         id: {
-          security : ['123', 2]
+          security: ['123', 2]
         }
       }
     }
@@ -95,7 +95,7 @@ describe('objectEquals', () => {
       data: {
         age: 18,
         id: {
-          security : ['123', 2]
+          security: ['123', 2]
         }
       }
     }

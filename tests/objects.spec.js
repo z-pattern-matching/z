@@ -43,10 +43,10 @@ describe('destructured object matching', () => {
   })
 
   it('should match something contained in a object', () => {
-    const result = matches({ name: 'Maria', data: {age: 18}})(
+    const result = matches({ name: 'Maria', data: {age: 18} })(
       (x = { age: 17 }) => false,
       (x = { age: 18 }) => false,
-      (x = { name: 'Maria'}) => true
+      (x = { name: 'Maria' }) => true
     )
 
     result.should.be.true
