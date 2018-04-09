@@ -1,6 +1,6 @@
 {
   "name": "z",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "main": "src/z.js",
   "description": "native pattern matching for javascript",
   "scripts": {
@@ -34,10 +34,10 @@
     ]
   },
   "nyc": {
-    "statements": 98.53,
-    "branches": 98.08,
+    "statements": 100,
+    "branches": 97.37,
     "functions": 100,
-    "lines": 98.5,
+    "lines": 100,
     "check-coverage": true,
     "reporter": [
       "lcov",
