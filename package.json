@@ -1,10 +1,6 @@
 {
   "name": "z",
-<<<<<<< HEAD
-  "version": "1.0.4",
-=======
   "version": "1.0.5",
->>>>>>> master
   "main": "src/z.js",
   "description": "native pattern matching for javascript",
   "scripts": {
