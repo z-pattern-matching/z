@@ -4,9 +4,9 @@ const matchArray = require('./matchArray')
 const { hasDestructuredObjectArguments } = require('./utils')
 const { objectAndArgsDestructureMatches } = require('./matchObject')
 
-const resolveMatchFunctions = (subjectToMatch, functions) => {
+const resolveMatchFunctions = (subjectToMatch, functions, scope) => {
   for (let i = 0; i < functions.length; i++) {
-    const currentMatch = getMatchDetails(functions[i])
+    const currentMatch = getMatchDetails.call(scope, functions[i])
 
     const matchHasSingleArgument = currentMatch.args.length === 1
     if (matchHasSingleArgument) {
@@ -40,7 +40,8 @@ const resolveMatchFunctions = (subjectToMatch, functions) => {
   }
 }
 
-const matches = (subjectToMatch) => (...functions) =>
-  resolveMatchFunctions(subjectToMatch, functions)
+const matches = (subjectToMatch) => function (...functions) {
+  return resolveMatchFunctions(subjectToMatch, functions, this)
+}
 
 module.exports = { matches }
