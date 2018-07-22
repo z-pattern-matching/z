@@ -59,7 +59,7 @@ matches([1, 2])(
   (a, tail) => 'a = 1, b = [2]'  
 )
 
-matches([1])(
+matches([1,2])(
   (a, b,  tail)       => 'Will not match here',
   (a = 2, tail = [])  => 'Will not match here',
   (a = 1, tail = [])  => 'Will match here, tail = []'
