@@ -77,11 +77,14 @@ const compress = (numbers) => {
     (x, y, xs) => x === y
       ? compress([x].concat(xs))
       : [x].concat(compress([y].concat(xs))),
-    (x, xs) => x // stopping condition
+    (x, [y]) => x === y // stopping condition
+      ? [x]
+      : [x, y],
+    x => x
   )
 }
 
-compress([1, 1, 2, 3, 4, 4, 4]) //output: [1, 2, 3]
+compress([1, 1, 2, 3, 4, 4, 4]) //output: [1, 2, 3, 4]
 ```
 
 ### License
