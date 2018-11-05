@@ -46,7 +46,7 @@ module.exports = (match, subjectToMatch) => {
   }
 
   // if is object (and not an array), check if contains
-  if (typeof subjectToMatch === 'object' && subjectToMatch !== null && !(subjectToMatch instanceof Array)) {
+  if (typeof subjectToMatch === 'object' && subjectToMatch !== null && !(subjectToMatch instanceof Array) && typeof matchValue === 'object') {
     if (objectEquals(matchValue, subjectToMatch)) {
       return option.Some(subjectToMatch)
     }

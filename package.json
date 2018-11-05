@@ -5,6 +5,7 @@
   "description": "native pattern matching for javascript",
   "scripts": {
     "test": "NODE_PATH=. mocha **/*.spec.js",
+    "test:debug": "NODE_PATH=. mocha --inspect-brk **/*.spec.js",
     "test:watch": "npm test -- --watch",
     "test:min": "npm run test:watch -- --reporter min",
     "lint": "standard --fix '**/*.js' | snazzy",
@@ -60,7 +61,7 @@
     "coveralls": "^2.11.16",
     "husky": "^0.14.3",
     "lint-staged": "^4.0.1",
-    "mocha": "^2.3.3",
+    "mocha": "^5.2.0",
     "mocha-lcov-reporter": "^1.2.0",
     "nyc": "^10.1.2",
     "prettier-std-cli": "^1.0.0",

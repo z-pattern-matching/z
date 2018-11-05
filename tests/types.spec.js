@@ -90,4 +90,13 @@ describe('types', () => {
 
     result.should.equal(true)
   })
+
+  it('should match object', () => {
+    const result = matches({ x: 3 })(
+      (x = String) => `${x} is a String`,
+      (x = Object) => 'Object'
+    )
+
+    result.should.equal('Object')
+  })
 })
