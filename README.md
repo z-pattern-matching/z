@@ -1,4 +1,4 @@
-# ![z](https://raw.githubusercontent.com/leonardiwagner/z/master/z-logo.png) Pattern matching for Javascript.
+# ![z](https://raw.githubusercontent.com/leonardiwagner/z/master/z-logo.png) Pattern matching for JavaScript
 
 [![Build Status](https://travis-ci.org/z-pattern-matching/z.svg?branch=master)](https://travis-ci.org/z-pattern-matching/z)
 [![Coverage Status](https://coveralls.io/repos/github/z-pattern-matching/z/badge.svg?branch=master)](https://coveralls.io/github/z-pattern-matching/z?branch=master)
