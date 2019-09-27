@@ -44,4 +44,12 @@ describe('matches', () => {
 
     result.should.equal(2)
   })
+
+  it('should match the correct object', () => {
+    const result = matches({ prop: 'value' })(
+      (x = [1, 2]) => false,
+      (x = { prop: 'value' }) => true
+    )
+    result.should.equal(true)
+  })
 })
