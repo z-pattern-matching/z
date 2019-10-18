@@ -35,6 +35,13 @@ module.exports = (match, subjectToMatch) => {
     return option.Some(subjectToMatch)
   }
 
+  // if it is a regex, and the value is a string, test that it matches
+  if (matchValue instanceof RegExp && typeof subjectToMatch === 'string') {
+    if (matchValue.test(subjectToMatch)) {
+      return option.Some(subjectToMatch)
+    }
+  }
+
   // if its array
   if (
     subjectToMatch instanceof Array &&
