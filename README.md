@@ -8,7 +8,7 @@
 - Install via npm: `npm install z`
 - Require z in your code and use the matches function: `const { matches } = require('z')`
 
-### Avaiable Patterns
+### Available Patterns
 
 - Matches by value: `(x = 1) =>, (x = null) =>, (x = 'true') =>`
 - Matches by object or array: `(x = {a: 1}) =>, (x = [1, 2]) =>`
